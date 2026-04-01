@@ -7,14 +7,23 @@ struct MemberListView: View {
     var addMemberViewModelFactory: () -> AddMemberViewModel
 
     var body: some View {
-        List {
-            ForEach(viewModel.members) { member in
-                MemberCard(member: member)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        onMemberSelected(member)
+        ZStack {
+            AppTheme.background
+                .ignoresSafeArea()
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(viewModel.members) { member in
+                        MemberCard(member: member)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                onMemberSelected(member)
+                            }
+                            .accessibilityIdentifier("memberCard_\(member.id)")
                     }
-                    .accessibilityIdentifier("memberCard_\(member.id)")
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 8)
             }
         }
         .searchable(text: $viewModel.searchQuery, prompt: "名前・メール・IDで検索")
@@ -50,26 +59,37 @@ struct MemberCard: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(member.name)
-                    .font(.headline)
-                Text(member.email)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
                 Text("ID: \(member.id)")
                     .font(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(AppTheme.onSurfaceVariant)
+                    .textCase(.uppercase)
+
+                Text(member.name)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(AppTheme.onSurface)
+
+                if member.loanCount > 0 {
+                    Text("\(member.loanCount)冊 貸し出し中")
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundStyle(AppTheme.primary)
+                        .textCase(.uppercase)
+                } else {
+                    Text("貸し出しなし")
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundStyle(AppTheme.primary)
+                        .textCase(.uppercase)
+                }
             }
             Spacer()
-            if member.loanCount > 0 {
-                Text("\(member.loanCount)冊")
-                    .font(.caption)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(.blue.opacity(0.1))
-                    .foregroundStyle(.blue)
-                    .clipShape(Capsule())
-            }
+            Image(systemName: "chevron.right")
+                .foregroundStyle(AppTheme.onSurfaceVariant)
         }
-        .padding(.vertical, 4)
+        .padding(20)
+        .background(AppTheme.surfaceContainerLowest)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.bottom, 20)
     }
 }

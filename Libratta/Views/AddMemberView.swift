@@ -5,33 +5,65 @@ struct AddMemberView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        Form {
-            Section("会員情報") {
-                TextField("名前", text: $viewModel.name)
-                    .accessibilityIdentifier("nameField")
-                TextField("メールアドレス", text: $viewModel.email)
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .accessibilityIdentifier("emailField")
-            }
+        ZStack {
+            AppTheme.background
+                .ignoresSafeArea()
 
-            if let error = viewModel.errorMessage {
-                Section {
-                    Text(error)
-                        .foregroundStyle(.red)
-                }
-            }
+            ScrollView {
+                VStack(spacing: 16) {
+                    // Form Card
+                    VStack(spacing: 16) {
+                        StitchFormField(label: "会員ID", icon: "magnifyingglass") {
+                            TextField("", text: .constant(""))
+                                .disabled(true)
+                        }
 
-            Section {
-                Button("登録") {
-                    viewModel.register()
+                        // Auto-generate checkbox
+                        Toggle("自動生成する", isOn: .constant(true))
+                            .font(.subheadline)
+                            .foregroundStyle(AppTheme.onSurface)
+                            .disabled(true)
+
+                        StitchFormField(label: "氏名", icon: "person") {
+                            TextField("", text: $viewModel.name)
+                                .accessibilityIdentifier("nameField")
+                        }
+
+                        StitchFormField(label: "メールアドレス", icon: "envelope") {
+                            TextField("", text: $viewModel.email)
+                                .textContentType(.emailAddress)
+                                .keyboardType(.emailAddress)
+                                .autocorrectionDisabled()
+                                .textInputAutocapitalization(.never)
+                                .accessibilityIdentifier("emailField")
+                        }
+                    }
+                    .padding(24)
+                    .background(AppTheme.surfaceContainerLow)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                    if let error = viewModel.errorMessage {
+                        Text(error)
+                            .foregroundStyle(AppTheme.error)
+                            .font(.subheadline)
+                    }
+
+                    Button {
+                        viewModel.register()
+                    } label: {
+                        HStack {
+                            Text("登録する")
+                            Image(systemName: "plus")
+                        }
+                    }
+                    .buttonStyle(StitchPrimaryButtonStyle())
+                    .accessibilityIdentifier("registerButton")
+                    .padding(.top, 8)
                 }
-                .accessibilityIdentifier("registerButton")
+                .padding(24)
             }
         }
-        .navigationTitle("会員登録")
+        .navigationTitle("会員の新規登録")
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("キャンセル") {

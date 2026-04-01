@@ -3,7 +3,7 @@ import SwiftUI
 enum AppRoute: Hashable {
     case memberList
     case bookCatalog(memberId: String, memberName: String)
-    case loanConfirmation(memberName: String, bookTitle: String)
+    case loanConfirmation(memberName: String, memberId: String, bookTitle: String, bookAuthor: String)
     case returnBook
     case bookList
     case debugSettings
@@ -63,10 +63,12 @@ struct RootView: View {
             )
         case let .bookCatalog(memberId, _):
             makeBookCatalogView(memberId: memberId)
-        case let .loanConfirmation(memberName, bookTitle):
+        case let .loanConfirmation(memberName, memberId, bookTitle, bookAuthor):
             LoanConfirmationView(
                 memberName: memberName,
                 bookTitle: bookTitle,
+                bookAuthor: bookAuthor,
+                memberId: memberId,
                 onDone: {
                     path = NavigationPath()
                 }
@@ -84,14 +86,19 @@ struct RootView: View {
     }
 
     private func makeBookCatalogView(memberId: String) -> BookCatalogView {
-        let vm = deps.makeBookCatalogViewModel()
+        let viewModel = deps.makeBookCatalogViewModel()
         if let member = deps.memberRepository.findById(memberId) {
-            vm.selectedMember = member
+            viewModel.selectedMember = member
         }
         return BookCatalogView(
-            viewModel: vm,
+            viewModel: viewModel,
             onLoanConfirmed: { member, book in
-                path.append(AppRoute.loanConfirmation(memberName: member.name, bookTitle: book.title))
+                path.append(AppRoute.loanConfirmation(
+                    memberName: member.name,
+                    memberId: member.id,
+                    bookTitle: book.title,
+                    bookAuthor: book.author
+                ))
             }
         )
     }

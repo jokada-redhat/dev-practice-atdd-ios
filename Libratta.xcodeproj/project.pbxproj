@@ -67,6 +67,7 @@
 		F6921CC42D51EEE10ABB0EBA /* LoginStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD389D168B03873832A1317B /* LoginStepTests.swift */; };
 		F6FB280BFB910FF0CD36F2E8 /* ReturnBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF7D9B17D0DC99A4C1A765 /* ReturnBookView.swift */; };
 		FD4782CD32B060FDF344F137 /* BookCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB74BDEC74132F6D44044DD /* BookCatalogView.swift */; };
+		FE631909F39D2634E7F535F8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7EBFF821D744F906184991 /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		0491352D5320F7FF53794AE2 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		0F415DEE0F444CC140E4CA3A /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
 		130DED50570ED7C1B91AD50A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		1C7EBFF821D744F906184991 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1C85C4C22D5BBB45D2D3FD26 /* SessionStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStepTests.swift; sourceTree = "<group>"; };
 		1FD3C7B5634A25EBDB21FBF4 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
 		212964FAE0DD12165D8F0E6F /* BookCatalogStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogStepTests.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				845E340E93B5DF60B417B6F9 /* Info.plist */,
+				1C7EBFF821D744F906184991 /* Theme.swift */,
 				EBCB3EBA69D072AEEBF444BD /* App */,
 				D439BEB09A1840F083FD7B00 /* ViewModels */,
 				98E26DF56C7827DB0BEE2B5D /* Views */,
@@ -533,6 +536,7 @@
 				3F27FA226EB53BFF46864232 /* SessionManager.swift in Sources */,
 				CAE04C2772D1E32449335177 /* SessionRepository.swift in Sources */,
 				AA9A092928339AAB3A5B6BBC /* StubAuthRepository.swift in Sources */,
+				FE631909F39D2634E7F535F8 /* Theme.swift in Sources */,
 				8F218C8D8FD2A626ED048BEB /* TopView.swift in Sources */,
 				8CCC41F190422E4A892A9AC4 /* TopViewModel.swift in Sources */,
 			);

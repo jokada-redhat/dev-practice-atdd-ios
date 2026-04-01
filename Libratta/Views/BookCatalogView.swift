@@ -6,39 +6,56 @@ struct BookCatalogView: View {
     var onLoanConfirmed: (Member, Book) -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
-            if let member = viewModel.selectedMember {
-                HStack {
-                    Image(systemName: "person.circle.fill")
-                        .foregroundStyle(.blue)
-                    Text(member.name)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .accessibilityIdentifier("selectedMember")
-                    Spacer()
-                }
-                .padding()
-                .background(.blue.opacity(0.05))
-            }
+        ZStack {
+            AppTheme.background
+                .ignoresSafeArea()
 
-            Picker("フィルタ", selection: $viewModel.selectedFilter) {
-                ForEach(BookFilter.allCases, id: \.self) { filter in
-                    Text(filter.rawValue).tag(filter)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal)
-            .padding(.vertical, 8)
-            .onChange(of: viewModel.selectedFilter) { _, _ in
-                viewModel.loadBooks()
-            }
-
-            List {
-                ForEach(viewModel.books) { book in
-                    BookCard(book: book) {
-                        bookToBorrow = book
+            VStack(spacing: 0) {
+                // Selected Member
+                if let member = viewModel.selectedMember {
+                    HStack(spacing: 8) {
+                        Image(systemName: "person.circle.fill")
+                            .foregroundStyle(AppTheme.primary)
+                        Text("選択中の会員:")
+                            .font(.caption)
+                            .foregroundStyle(AppTheme.onSurfaceVariant)
+                        Text(member.name)
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundStyle(AppTheme.onSurface)
+                            .accessibilityIdentifier("selectedMember")
+                        Spacer()
                     }
-                    .accessibilityIdentifier("bookCard_\(book.isbn)")
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(AppTheme.primaryFixed.opacity(0.5))
+                }
+
+                // Filter
+                Picker("フィルタ", selection: $viewModel.selectedFilter) {
+                    ForEach(BookFilter.allCases, id: \.self) { filter in
+                        Text(filter.rawValue).tag(filter)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 8)
+                .onChange(of: viewModel.selectedFilter) { _, _ in
+                    viewModel.loadBooks()
+                }
+
+                // Book Cards
+                ScrollView {
+                    LazyVStack(spacing: 12) {
+                        ForEach(viewModel.books) { book in
+                            CatalogBookCard(book: book) {
+                                bookToBorrow = book
+                            }
+                            .accessibilityIdentifier("bookCard_\(book.isbn)")
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
                 }
             }
         }
@@ -81,40 +98,72 @@ struct BookCatalogView: View {
     }
 }
 
-struct BookCard: View {
+struct CatalogBookCard: View {
     let book: Book
     let onBorrow: () -> Void
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(book.title)
-                    .font(.headline)
-                Text(book.author)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                Text("ISBN: \(book.isbn)")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                StatusBadge(
+                    text: book.isAvailable ? "貸出可" : "貸出中",
+                    isAvailable: book.isAvailable
+                )
+                Spacer()
             }
-            Spacer()
-            if book.isAvailable {
-                Button("貸出") {
-                    onBorrow()
+
+            Text(book.title)
+                .font(.headline)
+                .foregroundStyle(AppTheme.onSurface)
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("著者:")
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.outline)
+                    Text(book.author)
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.onSurfaceVariant)
                 }
-                .buttonStyle(.bordered)
-                .tint(.blue)
-                .accessibilityIdentifier("borrowButton_\(book.isbn)")
-            } else {
-                Text("貸出中")
-                    .font(.caption)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(.red.opacity(0.1))
-                    .foregroundStyle(.red)
-                    .clipShape(Capsule())
+                HStack {
+                    Text("ISBN:")
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.outline)
+                    Text(book.isbn)
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.onSurfaceVariant)
+                }
+                HStack {
+                    Text("出版年:")
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.outline)
+                    Text(String(book.publicationYear))
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.onSurfaceVariant)
+                }
+            }
+
+            if book.isAvailable {
+                HStack {
+                    Spacer()
+                    Button {
+                        onBorrow()
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text("貸し出す")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(AppTheme.primaryGradient)
+                        .foregroundStyle(.white)
+                        .clipShape(Capsule())
+                    }
+                    .accessibilityIdentifier("borrowButton_\(book.isbn)")
+                }
             }
         }
-        .padding(.vertical, 4)
+        .stitchCard()
     }
 }

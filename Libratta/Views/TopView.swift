@@ -9,109 +9,145 @@ struct TopView: View {
     var onDebugSettings: (() -> Void)?
 
     var body: some View {
-        VStack(spacing: 20) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("ようこそ")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    Text(viewModel.displayName)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .accessibilityIdentifier("displayName")
+        ZStack {
+            AppTheme.background
+                .ignoresSafeArea()
+
+            ScrollView {
+                VStack(spacing: 16) {
+                    // Profile Card
+                    HStack(spacing: 12) {
+                        Image(systemName: "person.circle.fill")
+                            .font(.system(size: 40))
+                            .foregroundStyle(AppTheme.primary)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("司書プロフィール")
+                                .font(.caption2)
+                                .foregroundStyle(AppTheme.onSurfaceVariant)
+                                .textCase(.uppercase)
+                            Text(viewModel.displayName)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundStyle(AppTheme.onSurface)
+                                .accessibilityIdentifier("displayName")
+                        }
+                        Spacer()
+                    }
+                    .padding(16)
+                    .background(AppTheme.surfaceContainerLow)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+
+                    // Action 1: Borrowing (Primary)
+                    Button {
+                        onBorrowing()
+                    } label: {
+                        VStack(spacing: 16) {
+                            Image(systemName: "text.book.closed")
+                                .font(.system(size: 48))
+                                .foregroundStyle(.white)
+
+                            Text("図書の貸し出し")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+
+                            Text("書籍を選んで貸し出す")
+                                .font(.subheadline)
+                                .foregroundStyle(AppTheme.primaryFixed.opacity(0.8))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(32)
+                        .background(AppTheme.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                    }
+                    .buttonStyle(.plain)
+
+                    // Action 2: Returns
+                    Button {
+                        onReturns()
+                    } label: {
+                        VStack(spacing: 16) {
+                            Image(systemName: "arrow.uturn.left.circle")
+                                .font(.system(size: 48))
+                                .foregroundStyle(AppTheme.primary)
+
+                            Text("返却")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(AppTheme.onSurface)
+
+                            Text("書籍を返却する")
+                                .font(.subheadline)
+                                .foregroundStyle(AppTheme.onSurfaceVariant)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(32)
+                        .background(AppTheme.surfaceContainerHigh)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24)
+                                .stroke(AppTheme.outlineVariant, lineWidth: 2)
+                        )
+                    }
+                    .buttonStyle(.plain)
+
+                    // Action 3: Book Management
+                    Button {
+                        onBookList()
+                    } label: {
+                        VStack(spacing: 16) {
+                            Image(systemName: "books.vertical")
+                                .font(.system(size: 48))
+                                .foregroundStyle(AppTheme.secondary)
+
+                            Text("書籍管理")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .foregroundStyle(AppTheme.onSurface)
+
+                            Text("書籍の一覧・登録")
+                                .font(.subheadline)
+                                .foregroundStyle(AppTheme.onSurfaceVariant)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(32)
+                        .background(AppTheme.surfaceContainerLow)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24)
+                                .stroke(AppTheme.outlineVariant, lineWidth: 2)
+                        )
+                    }
+                    .buttonStyle(.plain)
                 }
-                Spacer()
-                Button("ログアウト") {
-                    viewModel.logout()
-                    onLogout()
-                }
-                .accessibilityIdentifier("logoutButton")
+                .padding(24)
             }
-            .padding()
-
-            VStack(spacing: 16) {
-                MenuCard(
-                    title: "貸し出し",
-                    subtitle: "会員を選択して書籍を貸し出す",
-                    systemImage: "book.and.wrench",
-                    color: .blue
-                ) {
-                    onBorrowing()
-                }
-
-                MenuCard(
-                    title: "返却",
-                    subtitle: "貸し出し中の書籍を返却する",
-                    systemImage: "arrow.uturn.left.circle",
-                    color: .green
-                ) {
-                    onReturns()
-                }
-
-                MenuCard(
-                    title: "書籍一覧",
-                    subtitle: "書籍の検索・登録",
-                    systemImage: "books.vertical",
-                    color: .orange
-                ) {
-                    onBookList()
-                }
-            }
-            .padding(.horizontal)
-
-            Spacer()
         }
         .navigationTitle("Libratta")
         .navigationBarBackButtonHidden()
         .toolbar {
-            if let onDebugSettings {
-                ToolbarItem(placement: .primaryAction) {
-                    Menu {
+            ToolbarItem(placement: .primaryAction) {
+                Menu {
+                    Button {
+                        viewModel.logout()
+                        onLogout()
+                    } label: {
+                        Label("ログアウト", systemImage: "rectangle.portrait.and.arrow.right")
+                    }
+                    .accessibilityIdentifier("logoutButton")
+
+                    if let onDebugSettings {
                         Button {
                             onDebugSettings()
                         } label: {
                             Label("デバッグ設定", systemImage: "wrench.and.screwdriver")
                         }
-                    } label: {
-                        Image(systemName: "ellipsis.circle")
                     }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
             }
         }
-    }
-}
-
-struct MenuCard: View {
-    let title: String
-    let subtitle: String
-    let systemImage: String
-    let color: Color
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 16) {
-                Image(systemName: systemImage)
-                    .font(.title)
-                    .foregroundStyle(color)
-                    .frame(width: 44, height: 44)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.headline)
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.secondary)
-            }
-            .padding()
-            .background(.background)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .shadow(color: .black.opacity(0.05), radius: 4, y: 2)
-        }
-        .buttonStyle(.plain)
     }
 }
