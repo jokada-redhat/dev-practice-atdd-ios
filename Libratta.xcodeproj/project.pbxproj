@@ -1,0 +1,818 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04E7062C24FA1728DC8CB643 /* MemberManagementStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DB84888E71A1E194C29DAA /* MemberManagementStepTests.swift */; };
+		05D5F1100844986ABF0A1650 /* SearchBooksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6214A1588756D9EA18093290 /* SearchBooksUseCase.swift */; };
+		080D742C7DF211E7CA9D637E /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F508846727753DFFEADD618B /* BookListViewModel.swift */; };
+		1588A16B06D20C0B3209A27E /* AddMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC60D9D9FB9B0F39958DB2 /* AddMemberViewModel.swift */; };
+		186D0C2F270A8501826E18A2 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB83E81FCA72A37334F165 /* LoginRequest.swift */; };
+		1D485180EBD4621767E09D52 /* SkipAuthStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1B3E79A36DA5132AB99910 /* SkipAuthStepTests.swift */; };
+		2142EAB5DE6C30DFBE8526EE /* ListMembersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B64BF5DA9AA5E9FA19E51 /* ListMembersUseCase.swift */; };
+		25B1088411231C36A5CC010C /* ReturnFromListStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8901D003825169B8E6B28AB /* ReturnFromListStepTests.swift */; };
+		28817F88E4764262C366D5B6 /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C496D46A957200ABDA1877 /* DebugSettingsView.swift */; };
+		2964A3BABB3E426E5F8101C8 /* MemberListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A0BACA2A2075DBB698C6D /* MemberListView.swift */; };
+		2AB2D522CAE1559D4E8BAC56 /* MemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3C7B5634A25EBDB21FBF4 /* MemberRepository.swift */; };
+		2DD4965253EDCDFAF6F804C6 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491352D5320F7FF53794AE2 /* LoginResult.swift */; };
+		2DDA532D16D20AEB5B189D2F /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE84A80E132F6D76C493A73 /* AddBookView.swift */; };
+		2EF9624D4660B247BFD70719 /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5E0DB142419FA504CEC94 /* Loan.swift */; };
+		30B3EBE18FA58AFA3F51E88E /* RegisterBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618524EF077715AB0E3B52C4 /* RegisterBookUseCase.swift */; };
+		38F04731FE20459A49594C05 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D17D69D43D36B309B6504 /* Book.swift */; };
+		3BB5EF41EFB7F0A8FD7194A8 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707C3A3F6EC2564546EDA1B8 /* Member.swift */; };
+		3CF593165181E32088A13781 /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF19DD5BA53D1E349A257C /* AddBookViewModel.swift */; };
+		3F27FA226EB53BFF46864232 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */; };
+		4246CBA8C4ACBB8599D72227 /* SessionStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C85C4C22D5BBB45D2D3FD26 /* SessionStepTests.swift */; };
+		429FF2540732494AF88A75BB /* LoanConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4980CA8630239555B710DC8 /* LoanConfirmationView.swift */; };
+		436404BA073782D75692E814 /* AuthSkipper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFACFAE220988ECA054D9C2 /* AuthSkipper.swift */; };
+		44C3973F7EDF0F82A90278D5 /* AuthApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647323DD2E1C773A2A74608 /* AuthApiClient.swift */; };
+		4B9DDE4BC264933787D41D91 /* GherkinParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B5D33EE28EEE40D5C6F822 /* GherkinParser.swift */; };
+		54FB6A44D87A98B798321EEB /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD11AEB013E5C0B5E5F2B4 /* LoginUseCase.swift */; };
+		5E28B3DF27987F9B6E3D4625 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC3473CA2950990E10307A /* BookListView.swift */; };
+		62C791DCB4A3F01C16ACE4B6 /* AddMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746548CC2B1EFD8ADEEF3CFA /* AddMemberView.swift */; };
+		815C083985A2B635C0101CDC /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F415DEE0F444CC140E4CA3A /* BookRepository.swift */; };
+		8765C5C62B4605BF95733136 /* LoanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA804F11F81D6C7275C382 /* LoanRepository.swift */; };
+		88EE47C08171C1B7987A729B /* InMemoryBookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC7C830DCC106E39A1FF501 /* InMemoryBookRepository.swift */; };
+		8AE2FE4AA7F43D173FC7E754 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FCBCD33E1091562E53E136 /* RootView.swift */; };
+		8CCC41F190422E4A892A9AC4 /* TopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CA88C571E8C902A658B23B /* TopViewModel.swift */; };
+		8E5A8722F120280AA2451EB2 /* ReturnBookStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FFED6670BE0C1E9831771A /* ReturnBookStepTests.swift */; };
+		8F218C8D8FD2A626ED048BEB /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130DED50570ED7C1B91AD50A /* TopView.swift */; };
+		9150C4808437340052487AC1 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6E441786FA0D1FF7A9B6FA /* RepositoryError.swift */; };
+		96EBB4D2E25C4A0BF4D223DE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCEB7FC844F649D4E6AC66E /* LoginView.swift */; };
+		9860A980D96EA4332B7CCE9D /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */; };
+		9C27A580A2D6BCDB44E093ED /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AEEAF912727C054DEF878D /* LoginViewModel.swift */; };
+		A04BF10217849842408D6D2D /* BookCatalogStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212964FAE0DD12165D8F0E6F /* BookCatalogStepTests.swift */; };
+		A5ECB199BAE0357D0E1F540C /* RegisterMemberUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488DCFD6036D648F68C1A35 /* RegisterMemberUseCase.swift */; };
+		AA542FA646A0D1EE55D54C70 /* BorrowingFlowStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB2EFBAABFBDE7FDCF8CF1 /* BorrowingFlowStepTests.swift */; };
+		AA6ECFBCC4E72633576691B2 /* BookManagementStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B871BFD249AB745C7527285 /* BookManagementStepTests.swift */; };
+		AA9A092928339AAB3A5B6BBC /* StubAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA055739DEEA1305D5EA8B48 /* StubAuthRepository.swift */; };
+		ADC80B9B3CEA7D122D674879 /* BorrowBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A22A455D6D1298917680770 /* BorrowBookUseCase.swift */; };
+		B4391BD62FFCBE0308704B14 /* InMemoryMemberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22D7CD438ECA81FFE3F21A /* InMemoryMemberRepository.swift */; };
+		B90522D659057ECE80CF5B6E /* LoginApiStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D298900764EE755668971166 /* LoginApiStepTests.swift */; };
+		C206CEDB62DC411073B82428 /* LibrattaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4349A96423AB523D060A1E /* LibrattaUITests.swift */; };
+		CAE04C2772D1E32449335177 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A8FC236F1E46AF3A474F30 /* SessionRepository.swift */; };
+		CBB517FD98F180BDEF700AE6 /* MemberListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8F2E7592936D7562F76A7 /* MemberListViewModel.swift */; };
+		D24BEF25E58C36F7094657AF /* DummyDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A62872A3D14161B0EC37F4 /* DummyDataGenerator.swift */; };
+		D50304C6E4B8D4730C8E04A7 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13A9E9FC435FECED6699A85 /* AppDependencies.swift */; };
+		DC4B4C98DF192E8E28B2C514 /* ReturnBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2BA789883D5A19E9A2E0E /* ReturnBookViewModel.swift */; };
+		E358783FE12E04A4EA85231D /* BookCatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912CC37B14CE0EE177C12A45 /* BookCatalogViewModel.swift */; };
+		E424F65380CC71B2D1224268 /* InMemoryLoanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB881AC7D554CC99D9D4F4 /* InMemoryLoanRepository.swift */; };
+		EBF4189F0603780D73157810 /* LibrattaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87437426360D90877C6D67BA /* LibrattaApp.swift */; };
+		F2E799735119EE776292B844 /* InMemorySessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD11DBF097A48F4DCCBD02B /* InMemorySessionRepository.swift */; };
+		F2F2990CCF8324949A7C5411 /* ReturnBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC0D4F3D45FEF6565F1EFD9 /* ReturnBookUseCase.swift */; };
+		F6921CC42D51EEE10ABB0EBA /* LoginStepTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD389D168B03873832A1317B /* LoginStepTests.swift */; };
+		F6FB280BFB910FF0CD36F2E8 /* ReturnBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCF7D9B17D0DC99A4C1A765 /* ReturnBookView.swift */; };
+		FD4782CD32B060FDF344F137 /* BookCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB74BDEC74132F6D44044DD /* BookCatalogView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84EA85252DAEE7B213261FB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 310350A90A5B15910AA16428 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 137AB83F0FF0858FF1ED88CA;
+			remoteInfo = Libratta;
+		};
+		D4108BCC1585197C1ECC9382 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 310350A90A5B15910AA16428 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 137AB83F0FF0858FF1ED88CA;
+			remoteInfo = Libratta;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0491352D5320F7FF53794AE2 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
+		0F415DEE0F444CC140E4CA3A /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		130DED50570ED7C1B91AD50A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		1C85C4C22D5BBB45D2D3FD26 /* SessionStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStepTests.swift; sourceTree = "<group>"; };
+		1FD3C7B5634A25EBDB21FBF4 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
+		212964FAE0DD12165D8F0E6F /* BookCatalogStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogStepTests.swift; sourceTree = "<group>"; };
+		2FDB2EFBAABFBDE7FDCF8CF1 /* BorrowingFlowStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowingFlowStepTests.swift; sourceTree = "<group>"; };
+		35A62872A3D14161B0EC37F4 /* DummyDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataGenerator.swift; sourceTree = "<group>"; };
+		3C1B3E79A36DA5132AB99910 /* SkipAuthStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipAuthStepTests.swift; sourceTree = "<group>"; };
+		4488DCFD6036D648F68C1A35 /* RegisterMemberUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMemberUseCase.swift; sourceTree = "<group>"; };
+		47DB84888E71A1E194C29DAA /* MemberManagementStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementStepTests.swift; sourceTree = "<group>"; };
+		5B871BFD249AB745C7527285 /* BookManagementStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookManagementStepTests.swift; sourceTree = "<group>"; };
+		5BF5E0DB142419FA504CEC94 /* Loan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loan.swift; sourceTree = "<group>"; };
+		618524EF077715AB0E3B52C4 /* RegisterBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBookUseCase.swift; sourceTree = "<group>"; };
+		6214A1588756D9EA18093290 /* SearchBooksUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBooksUseCase.swift; sourceTree = "<group>"; };
+		63FC60D9D9FB9B0F39958DB2 /* AddMemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberViewModel.swift; sourceTree = "<group>"; };
+		6A2B64BF5DA9AA5E9FA19E51 /* ListMembersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMembersUseCase.swift; sourceTree = "<group>"; };
+		6BCEB7FC844F649D4E6AC66E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6FFACFAE220988ECA054D9C2 /* AuthSkipper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSkipper.swift; sourceTree = "<group>"; };
+		707C3A3F6EC2564546EDA1B8 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		71BC3473CA2950990E10307A /* BookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListView.swift; sourceTree = "<group>"; };
+		746548CC2B1EFD8ADEEF3CFA /* AddMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberView.swift; sourceTree = "<group>"; };
+		79C496D46A957200ABDA1877 /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
+		7A22A455D6D1298917680770 /* BorrowBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowBookUseCase.swift; sourceTree = "<group>"; };
+		7DCF7D9B17D0DC99A4C1A765 /* ReturnBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookView.swift; sourceTree = "<group>"; };
+		7EEB881AC7D554CC99D9D4F4 /* InMemoryLoanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryLoanRepository.swift; sourceTree = "<group>"; };
+		7FBB83E81FCA72A37334F165 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		845E340E93B5DF60B417B6F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		85B5D33EE28EEE40D5C6F822 /* GherkinParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GherkinParser.swift; sourceTree = "<group>"; };
+		87437426360D90877C6D67BA /* LibrattaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrattaApp.swift; sourceTree = "<group>"; };
+		8FC7C830DCC106E39A1FF501 /* InMemoryBookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryBookRepository.swift; sourceTree = "<group>"; };
+		911F60F49122D23F99E9CDD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		912CC37B14CE0EE177C12A45 /* BookCatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogViewModel.swift; sourceTree = "<group>"; };
+		94FCBCD33E1091562E53E136 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		96A2BA789883D5A19E9A2E0E /* ReturnBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookViewModel.swift; sourceTree = "<group>"; };
+		A4980CA8630239555B710DC8 /* LoanConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanConfirmationView.swift; sourceTree = "<group>"; };
+		A7FA804F11F81D6C7275C382 /* LoanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRepository.swift; sourceTree = "<group>"; };
+		A8901D003825169B8E6B28AB /* ReturnFromListStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnFromListStepTests.swift; sourceTree = "<group>"; };
+		AE22D7CD438ECA81FFE3F21A /* InMemoryMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryMemberRepository.swift; sourceTree = "<group>"; };
+		B1AEEAF912727C054DEF878D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B2CA88C571E8C902A658B23B /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
+		B647323DD2E1C773A2A74608 /* AuthApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApiClient.swift; sourceTree = "<group>"; };
+		B73D17D69D43D36B309B6504 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		BFCD11AEB013E5C0B5E5F2B4 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		C49A0BACA2A2075DBB698C6D /* MemberListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListView.swift; sourceTree = "<group>"; };
+		C8A71A9F45D8D6698FFB438E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CC4349A96423AB523D060A1E /* LibrattaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrattaUITests.swift; sourceTree = "<group>"; };
+		D298900764EE755668971166 /* LoginApiStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiStepTests.swift; sourceTree = "<group>"; };
+		D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		DAC0D4F3D45FEF6565F1EFD9 /* ReturnBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookUseCase.swift; sourceTree = "<group>"; };
+		DDD11DBF097A48F4DCCBD02B /* InMemorySessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySessionRepository.swift; sourceTree = "<group>"; };
+		E13A9E9FC435FECED6699A85 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		E3C8F2E7592936D7562F76A7 /* MemberListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewModel.swift; sourceTree = "<group>"; };
+		E5FFED6670BE0C1E9831771A /* ReturnBookStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookStepTests.swift; sourceTree = "<group>"; };
+		EAE84A80E132F6D76C493A73 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		ECCF19DD5BA53D1E349A257C /* AddBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewModel.swift; sourceTree = "<group>"; };
+		F1F78E3A072FFE6747C32935 /* LibrattaTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LibrattaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2A8FC236F1E46AF3A474F30 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
+		F508846727753DFFEADD618B /* BookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewModel.swift; sourceTree = "<group>"; };
+		FA055739DEEA1305D5EA8B48 /* StubAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAuthRepository.swift; sourceTree = "<group>"; };
+		FBB74BDEC74132F6D44044DD /* BookCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogView.swift; sourceTree = "<group>"; };
+		FBE989BD0327C619608F153D /* Libratta.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Libratta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD389D168B03873832A1317B /* LoginStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStepTests.swift; sourceTree = "<group>"; };
+		FF1D774B18149D4C4F30D8F3 /* LibrattaUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LibrattaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF6E441786FA0D1FF7A9B6FA /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		14E7AE16660C753B233132E6 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				212964FAE0DD12165D8F0E6F /* BookCatalogStepTests.swift */,
+				5B871BFD249AB745C7527285 /* BookManagementStepTests.swift */,
+				2FDB2EFBAABFBDE7FDCF8CF1 /* BorrowingFlowStepTests.swift */,
+				D298900764EE755668971166 /* LoginApiStepTests.swift */,
+				FD389D168B03873832A1317B /* LoginStepTests.swift */,
+				47DB84888E71A1E194C29DAA /* MemberManagementStepTests.swift */,
+				E5FFED6670BE0C1E9831771A /* ReturnBookStepTests.swift */,
+				A8901D003825169B8E6B28AB /* ReturnFromListStepTests.swift */,
+				1C85C4C22D5BBB45D2D3FD26 /* SessionStepTests.swift */,
+				3C1B3E79A36DA5132AB99910 /* SkipAuthStepTests.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
+		1D3556A222DF6315A724EBB7 /* LibrattaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C8A71A9F45D8D6698FFB438E /* Info.plist */,
+				CC4349A96423AB523D060A1E /* LibrattaUITests.swift */,
+			);
+			path = LibrattaUITests;
+			sourceTree = "<group>";
+		};
+		236727CEE147ADE8C7193ABE /* Libratta */ = {
+			isa = PBXGroup;
+			children = (
+				845E340E93B5DF60B417B6F9 /* Info.plist */,
+				EBCB3EBA69D072AEEBF444BD /* App */,
+				D439BEB09A1840F083FD7B00 /* ViewModels */,
+				98E26DF56C7827DB0BEE2B5D /* Views */,
+			);
+			path = Libratta;
+			sourceTree = "<group>";
+		};
+		3FF8DCA756268AD32A296EF6 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				7A22A455D6D1298917680770 /* BorrowBookUseCase.swift */,
+				6A2B64BF5DA9AA5E9FA19E51 /* ListMembersUseCase.swift */,
+				618524EF077715AB0E3B52C4 /* RegisterBookUseCase.swift */,
+				4488DCFD6036D648F68C1A35 /* RegisterMemberUseCase.swift */,
+				DAC0D4F3D45FEF6565F1EFD9 /* ReturnBookUseCase.swift */,
+				6214A1588756D9EA18093290 /* SearchBooksUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		46DA0C6F2562E6A1F2C22E54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B73D17D69D43D36B309B6504 /* Book.swift */,
+				5BF5E0DB142419FA504CEC94 /* Loan.swift */,
+				707C3A3F6EC2564546EDA1B8 /* Member.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		535EB6B2420A068257178059 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				B647323DD2E1C773A2A74608 /* AuthApiClient.swift */,
+				D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */,
+				6FFACFAE220988ECA054D9C2 /* AuthSkipper.swift */,
+				7FBB83E81FCA72A37334F165 /* LoginRequest.swift */,
+				0491352D5320F7FF53794AE2 /* LoginResult.swift */,
+				BFCD11AEB013E5C0B5E5F2B4 /* LoginUseCase.swift */,
+				FA055739DEEA1305D5EA8B48 /* StubAuthRepository.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		6069D6E3874EC5C93E203DC8 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0F415DEE0F444CC140E4CA3A /* BookRepository.swift */,
+				A7FA804F11F81D6C7275C382 /* LoanRepository.swift */,
+				1FD3C7B5634A25EBDB21FBF4 /* MemberRepository.swift */,
+				FF6E441786FA0D1FF7A9B6FA /* RepositoryError.swift */,
+				7349F208290E07FA5B782569 /* InMemory */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		7349F208290E07FA5B782569 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				8FC7C830DCC106E39A1FF501 /* InMemoryBookRepository.swift */,
+				7EEB881AC7D554CC99D9D4F4 /* InMemoryLoanRepository.swift */,
+				AE22D7CD438ECA81FFE3F21A /* InMemoryMemberRepository.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		98E26DF56C7827DB0BEE2B5D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EAE84A80E132F6D76C493A73 /* AddBookView.swift */,
+				746548CC2B1EFD8ADEEF3CFA /* AddMemberView.swift */,
+				FBB74BDEC74132F6D44044DD /* BookCatalogView.swift */,
+				71BC3473CA2950990E10307A /* BookListView.swift */,
+				79C496D46A957200ABDA1877 /* DebugSettingsView.swift */,
+				A4980CA8630239555B710DC8 /* LoanConfirmationView.swift */,
+				6BCEB7FC844F649D4E6AC66E /* LoginView.swift */,
+				C49A0BACA2A2075DBB698C6D /* MemberListView.swift */,
+				7DCF7D9B17D0DC99A4C1A765 /* ReturnBookView.swift */,
+				130DED50570ED7C1B91AD50A /* TopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A88C2D92A306C5120197C6EB /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				85B5D33EE28EEE40D5C6F822 /* GherkinParser.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		B2856F3F7B42DF7478B938E5 /* Libratta */ = {
+			isa = PBXGroup;
+			children = (
+				535EB6B2420A068257178059 /* Auth */,
+				F2A766CC2A85A77E03EE6A62 /* Debug */,
+				46DA0C6F2562E6A1F2C22E54 /* Models */,
+				6069D6E3874EC5C93E203DC8 /* Repositories */,
+				E974E265012C43EB58DD3400 /* Session */,
+				3FF8DCA756268AD32A296EF6 /* UseCases */,
+			);
+			name = Libratta;
+			path = Sources/Libratta;
+			sourceTree = "<group>";
+		};
+		CE6C64AF630B9534E2BDCFB6 = {
+			isa = PBXGroup;
+			children = (
+				236727CEE147ADE8C7193ABE /* Libratta */,
+				B2856F3F7B42DF7478B938E5 /* Libratta */,
+				EB4D4282BF5DC8B90192A4A7 /* LibrattaTests */,
+				1D3556A222DF6315A724EBB7 /* LibrattaUITests */,
+				FE9C85F1630A0DE606DC8BE7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D439BEB09A1840F083FD7B00 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				ECCF19DD5BA53D1E349A257C /* AddBookViewModel.swift */,
+				63FC60D9D9FB9B0F39958DB2 /* AddMemberViewModel.swift */,
+				912CC37B14CE0EE177C12A45 /* BookCatalogViewModel.swift */,
+				F508846727753DFFEADD618B /* BookListViewModel.swift */,
+				B1AEEAF912727C054DEF878D /* LoginViewModel.swift */,
+				E3C8F2E7592936D7562F76A7 /* MemberListViewModel.swift */,
+				96A2BA789883D5A19E9A2E0E /* ReturnBookViewModel.swift */,
+				B2CA88C571E8C902A658B23B /* TopViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E974E265012C43EB58DD3400 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				DDD11DBF097A48F4DCCBD02B /* InMemorySessionRepository.swift */,
+				D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */,
+				F2A8FC236F1E46AF3A474F30 /* SessionRepository.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		EB4D4282BF5DC8B90192A4A7 /* LibrattaTests */ = {
+			isa = PBXGroup;
+			children = (
+				911F60F49122D23F99E9CDD4 /* Info.plist */,
+				14E7AE16660C753B233132E6 /* Steps */,
+				A88C2D92A306C5120197C6EB /* Support */,
+			);
+			path = LibrattaTests;
+			sourceTree = "<group>";
+		};
+		EBCB3EBA69D072AEEBF444BD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E13A9E9FC435FECED6699A85 /* AppDependencies.swift */,
+				87437426360D90877C6D67BA /* LibrattaApp.swift */,
+				94FCBCD33E1091562E53E136 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F2A766CC2A85A77E03EE6A62 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				35A62872A3D14161B0EC37F4 /* DummyDataGenerator.swift */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		FE9C85F1630A0DE606DC8BE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FBE989BD0327C619608F153D /* Libratta.app */,
+				F1F78E3A072FFE6747C32935 /* LibrattaTests.xctest */,
+				FF1D774B18149D4C4F30D8F3 /* LibrattaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		137AB83F0FF0858FF1ED88CA /* Libratta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69A7E773DD64B4205F1A2BB2 /* Build configuration list for PBXNativeTarget "Libratta" */;
+			buildPhases = (
+				F6BDC0C6DB4D636E4D73465A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Libratta;
+			packageProductDependencies = (
+			);
+			productName = Libratta;
+			productReference = FBE989BD0327C619608F153D /* Libratta.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2594DED67B0E0515DF6C2E61 /* LibrattaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 519D00CB5C4BE2B066767805 /* Build configuration list for PBXNativeTarget "LibrattaUITests" */;
+			buildPhases = (
+				41AC5874D5555A1CE1DD0098 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F7C5A600A24609E11670C532 /* PBXTargetDependency */,
+			);
+			name = LibrattaUITests;
+			packageProductDependencies = (
+			);
+			productName = LibrattaUITests;
+			productReference = FF1D774B18149D4C4F30D8F3 /* LibrattaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		57E3C0336C43AAE89E802403 /* LibrattaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D7E462D2AD0CB7644552F8D1 /* Build configuration list for PBXNativeTarget "LibrattaTests" */;
+			buildPhases = (
+				34C131F3EAC5266793EE2986 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31322A8DF4D630D8755D4438 /* PBXTargetDependency */,
+			);
+			name = LibrattaTests;
+			packageProductDependencies = (
+			);
+			productName = LibrattaTests;
+			productReference = F1F78E3A072FFE6747C32935 /* LibrattaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		310350A90A5B15910AA16428 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2594DED67B0E0515DF6C2E61 = {
+						TestTargetID = 137AB83F0FF0858FF1ED88CA;
+					};
+				};
+			};
+			buildConfigurationList = 6B26B23F42D7618D07C7E9E8 /* Build configuration list for PBXProject "Libratta" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CE6C64AF630B9534E2BDCFB6;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = FE9C85F1630A0DE606DC8BE7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				137AB83F0FF0858FF1ED88CA /* Libratta */,
+				57E3C0336C43AAE89E802403 /* LibrattaTests */,
+				2594DED67B0E0515DF6C2E61 /* LibrattaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34C131F3EAC5266793EE2986 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A04BF10217849842408D6D2D /* BookCatalogStepTests.swift in Sources */,
+				AA6ECFBCC4E72633576691B2 /* BookManagementStepTests.swift in Sources */,
+				AA542FA646A0D1EE55D54C70 /* BorrowingFlowStepTests.swift in Sources */,
+				4B9DDE4BC264933787D41D91 /* GherkinParser.swift in Sources */,
+				B90522D659057ECE80CF5B6E /* LoginApiStepTests.swift in Sources */,
+				F6921CC42D51EEE10ABB0EBA /* LoginStepTests.swift in Sources */,
+				04E7062C24FA1728DC8CB643 /* MemberManagementStepTests.swift in Sources */,
+				8E5A8722F120280AA2451EB2 /* ReturnBookStepTests.swift in Sources */,
+				25B1088411231C36A5CC010C /* ReturnFromListStepTests.swift in Sources */,
+				4246CBA8C4ACBB8599D72227 /* SessionStepTests.swift in Sources */,
+				1D485180EBD4621767E09D52 /* SkipAuthStepTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41AC5874D5555A1CE1DD0098 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C206CEDB62DC411073B82428 /* LibrattaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6BDC0C6DB4D636E4D73465A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DDA532D16D20AEB5B189D2F /* AddBookView.swift in Sources */,
+				3CF593165181E32088A13781 /* AddBookViewModel.swift in Sources */,
+				62C791DCB4A3F01C16ACE4B6 /* AddMemberView.swift in Sources */,
+				1588A16B06D20C0B3209A27E /* AddMemberViewModel.swift in Sources */,
+				D50304C6E4B8D4730C8E04A7 /* AppDependencies.swift in Sources */,
+				44C3973F7EDF0F82A90278D5 /* AuthApiClient.swift in Sources */,
+				9860A980D96EA4332B7CCE9D /* AuthRepository.swift in Sources */,
+				436404BA073782D75692E814 /* AuthSkipper.swift in Sources */,
+				38F04731FE20459A49594C05 /* Book.swift in Sources */,
+				FD4782CD32B060FDF344F137 /* BookCatalogView.swift in Sources */,
+				E358783FE12E04A4EA85231D /* BookCatalogViewModel.swift in Sources */,
+				5E28B3DF27987F9B6E3D4625 /* BookListView.swift in Sources */,
+				080D742C7DF211E7CA9D637E /* BookListViewModel.swift in Sources */,
+				815C083985A2B635C0101CDC /* BookRepository.swift in Sources */,
+				ADC80B9B3CEA7D122D674879 /* BorrowBookUseCase.swift in Sources */,
+				28817F88E4764262C366D5B6 /* DebugSettingsView.swift in Sources */,
+				D24BEF25E58C36F7094657AF /* DummyDataGenerator.swift in Sources */,
+				88EE47C08171C1B7987A729B /* InMemoryBookRepository.swift in Sources */,
+				E424F65380CC71B2D1224268 /* InMemoryLoanRepository.swift in Sources */,
+				B4391BD62FFCBE0308704B14 /* InMemoryMemberRepository.swift in Sources */,
+				F2E799735119EE776292B844 /* InMemorySessionRepository.swift in Sources */,
+				EBF4189F0603780D73157810 /* LibrattaApp.swift in Sources */,
+				2142EAB5DE6C30DFBE8526EE /* ListMembersUseCase.swift in Sources */,
+				2EF9624D4660B247BFD70719 /* Loan.swift in Sources */,
+				429FF2540732494AF88A75BB /* LoanConfirmationView.swift in Sources */,
+				8765C5C62B4605BF95733136 /* LoanRepository.swift in Sources */,
+				186D0C2F270A8501826E18A2 /* LoginRequest.swift in Sources */,
+				2DD4965253EDCDFAF6F804C6 /* LoginResult.swift in Sources */,
+				54FB6A44D87A98B798321EEB /* LoginUseCase.swift in Sources */,
+				96EBB4D2E25C4A0BF4D223DE /* LoginView.swift in Sources */,
+				9C27A580A2D6BCDB44E093ED /* LoginViewModel.swift in Sources */,
+				3BB5EF41EFB7F0A8FD7194A8 /* Member.swift in Sources */,
+				2964A3BABB3E426E5F8101C8 /* MemberListView.swift in Sources */,
+				CBB517FD98F180BDEF700AE6 /* MemberListViewModel.swift in Sources */,
+				2AB2D522CAE1559D4E8BAC56 /* MemberRepository.swift in Sources */,
+				30B3EBE18FA58AFA3F51E88E /* RegisterBookUseCase.swift in Sources */,
+				A5ECB199BAE0357D0E1F540C /* RegisterMemberUseCase.swift in Sources */,
+				9150C4808437340052487AC1 /* RepositoryError.swift in Sources */,
+				F2F2990CCF8324949A7C5411 /* ReturnBookUseCase.swift in Sources */,
+				F6FB280BFB910FF0CD36F2E8 /* ReturnBookView.swift in Sources */,
+				DC4B4C98DF192E8E28B2C514 /* ReturnBookViewModel.swift in Sources */,
+				8AE2FE4AA7F43D173FC7E754 /* RootView.swift in Sources */,
+				05D5F1100844986ABF0A1650 /* SearchBooksUseCase.swift in Sources */,
+				3F27FA226EB53BFF46864232 /* SessionManager.swift in Sources */,
+				CAE04C2772D1E32449335177 /* SessionRepository.swift in Sources */,
+				AA9A092928339AAB3A5B6BBC /* StubAuthRepository.swift in Sources */,
+				8F218C8D8FD2A626ED048BEB /* TopView.swift in Sources */,
+				8CCC41F190422E4A892A9AC4 /* TopViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		31322A8DF4D630D8755D4438 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 137AB83F0FF0858FF1ED88CA /* Libratta */;
+			targetProxy = D4108BCC1585197C1ECC9382 /* PBXContainerItemProxy */;
+		};
+		F7C5A600A24609E11670C532 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 137AB83F0FF0858FF1ED88CA /* Libratta */;
+			targetProxy = 84EA85252DAEE7B213261FB3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		07F2D9B08FAE31EF2AEAD82A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LibrattaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.LibrattaTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Libratta.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Libratta";
+			};
+			name = Debug;
+		};
+		257C75CFAC4E7A92F652E9FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Libratta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.libratta;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6741C06FDAF940FBC562A1A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = Libratta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.libratta;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7C03DA01C38CDB85FA8221BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LibrattaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.LibrattaUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Libratta;
+			};
+			name = Debug;
+		};
+		7C9F1D51EC52B0E43011B04E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		88BE4CD23D9CB57C074D22FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A2567E9C7B11E24DE9B663BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LibrattaUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.LibrattaUITests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Libratta;
+			};
+			name = Release;
+		};
+		F7EE98F88EAF6F7EC157E823 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LibrattaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.LibrattaTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Libratta.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Libratta";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		519D00CB5C4BE2B066767805 /* Build configuration list for PBXNativeTarget "LibrattaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C03DA01C38CDB85FA8221BB /* Debug */,
+				A2567E9C7B11E24DE9B663BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		69A7E773DD64B4205F1A2BB2 /* Build configuration list for PBXNativeTarget "Libratta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				257C75CFAC4E7A92F652E9FC /* Debug */,
+				6741C06FDAF940FBC562A1A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6B26B23F42D7618D07C7E9E8 /* Build configuration list for PBXProject "Libratta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C9F1D51EC52B0E43011B04E /* Debug */,
+				88BE4CD23D9CB57C074D22FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D7E462D2AD0CB7644552F8D1 /* Build configuration list for PBXNativeTarget "LibrattaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07F2D9B08FAE31EF2AEAD82A /* Debug */,
+				F7EE98F88EAF6F7EC157E823 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 310350A90A5B15910AA16428 /* Project object */;
+}

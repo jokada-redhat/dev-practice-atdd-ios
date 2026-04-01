@@ -1,0 +1,13 @@
+.DS_Store
+.build/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.swp
+*~
+.swiftpm/
+xcuserdata/
+
+# Claude Code - keep CLAUDE.md only
+.claude/*
+!.claude/CLAUDE.md
