@@ -18,8 +18,8 @@ final class ReturnBookStepTests: XCTestCase {
     }
 
     private func setupBackground() throws {
-        try memberRepo.save(Member(id: "DA-8821", name: "山田太郎", email: "yamada@example.com"))
-        try memberRepo.save(Member(id: "DA-1156", name: "田中次郎", email: "tanaka@example.com"))
+        try memberRepo.save(Member(id: "DA-8821", name: "山田太郎"))
+        try memberRepo.save(Member(id: "DA-1156", name: "田中次郎"))
         try bookRepo.save(Book(title: "The Infinite Library", author: "Author", isbn: "978-1234567890", publicationYear: 2020))
         try bookRepo.save(Book(title: "Foundation", author: "Author", isbn: "978-0553293357", publicationYear: 1951))
         try bookRepo.save(Book(title: "Neuromancer", author: "Author", isbn: "978-0441569595", publicationYear: 1984))
@@ -31,12 +31,12 @@ final class ReturnBookStepTests: XCTestCase {
 
     func test全ての貸出中書籍が一覧表示される() throws {
         try setupBackground()
-        XCTAssertEqual(loanRepo.findAllActive().count, 3)
+        XCTAssertEqual(loanRepo.findAll().count, 3)
     }
 
     func test書籍名で部分一致検索できる() throws {
         try setupBackground()
-        let allLoans = loanRepo.findAllActive()
+        let allLoans = loanRepo.findAll()
         let results = allLoans.filter { loan in
             guard let book = bookRepo.findById(loan.bookId) else { return false }
             return book.title.lowercased().contains("infinite")
@@ -46,7 +46,7 @@ final class ReturnBookStepTests: XCTestCase {
 
     func testISBNで検索できる() throws {
         try setupBackground()
-        let allLoans = loanRepo.findAllActive()
+        let allLoans = loanRepo.findAll()
         let results = allLoans.filter { loan in
             guard let book = bookRepo.findById(loan.bookId) else { return false }
             return book.isbn.contains("978-0553")
@@ -56,7 +56,7 @@ final class ReturnBookStepTests: XCTestCase {
 
     func test会員名で検索できる() throws {
         try setupBackground()
-        let allLoans = loanRepo.findAllActive()
+        let allLoans = loanRepo.findAll()
         let results = allLoans.filter { loan in
             guard let member = memberRepo.findById(loan.memberId) else { return false }
             return member.name.contains("田中")
@@ -66,7 +66,7 @@ final class ReturnBookStepTests: XCTestCase {
 
     func test会員IDで検索できる() throws {
         try setupBackground()
-        let results = loanRepo.findAllActive().filter { $0.memberId == "DA-8821" }
+        let results = loanRepo.findAll().filter { $0.memberId == "DA-8821" }
         XCTAssertEqual(results.count, 2)
     }
 
@@ -78,7 +78,21 @@ final class ReturnBookStepTests: XCTestCase {
             XCTFail("返却が成功するべき")
             return
         }
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .available)
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 1)
+        let book = bookRepo.findByTitle("The Infinite Library")!
+        XCTAssertNil(loanRepo.findActiveByBookId(book.id))
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 1)
+    }
+
+    func test検索をクリアすると全件表示に戻る() throws {
+        try setupBackground()
+        // 検索して絞り込み
+        let filtered = loanRepo.findAll().filter { loan in
+            guard let book = bookRepo.findById(loan.bookId) else { return false }
+            return book.title.lowercased().contains("infinite")
+        }
+        XCTAssertEqual(filtered.count, 1)
+
+        // クリア後は全件
+        XCTAssertEqual(loanRepo.findAll().count, 3)
     }
 }

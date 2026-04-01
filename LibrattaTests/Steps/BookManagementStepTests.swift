@@ -4,9 +4,11 @@ import XCTest
 /// Feature: 書籍管理 (book_management.feature)
 final class BookManagementStepTests: XCTestCase {
     private var bookRepo: InMemoryBookRepository!
+    private var loanRepo: InMemoryLoanRepository!
 
     override func setUp() {
         bookRepo = InMemoryBookRepository()
+        loanRepo = InMemoryLoanRepository()
     }
 
     func test登録済みの書籍が一覧表示される() throws {
@@ -14,7 +16,7 @@ final class BookManagementStepTests: XCTestCase {
         try bookRepo.save(Book(title: "Foundation", author: "Isaac Asimov", isbn: "978-0553293357", publicationYear: 1951))
         try bookRepo.save(Book(title: "Neuromancer", author: "William Gibson", isbn: "978-0441569595", publicationYear: 1984))
 
-        let useCase = SearchBooksUseCase(bookRepository: bookRepo)
+        let useCase = SearchBooksUseCase(bookRepository: bookRepo, loanRepository: loanRepo)
         XCTAssertEqual(useCase.listAll().count, 3)
     }
 
@@ -22,7 +24,7 @@ final class BookManagementStepTests: XCTestCase {
         try bookRepo.save(Book(title: "The Infinite Library", author: "Jorge Borges", isbn: "978-1234567890", publicationYear: 2020))
         try bookRepo.save(Book(title: "Foundation", author: "Isaac Asimov", isbn: "978-0553293357", publicationYear: 1951))
 
-        let useCase = SearchBooksUseCase(bookRepository: bookRepo)
+        let useCase = SearchBooksUseCase(bookRepository: bookRepo, loanRepository: loanRepo)
         let results = useCase.search("Infinite")
 
         XCTAssertEqual(results.count, 1)
@@ -33,7 +35,7 @@ final class BookManagementStepTests: XCTestCase {
         try bookRepo.save(Book(title: "The Infinite Library", author: "Jorge Borges", isbn: "978-1234567890", publicationYear: 2020))
         try bookRepo.save(Book(title: "Foundation", author: "Isaac Asimov", isbn: "978-0553293357", publicationYear: 1951))
 
-        let useCase = SearchBooksUseCase(bookRepository: bookRepo)
+        let useCase = SearchBooksUseCase(bookRepository: bookRepo, loanRepository: loanRepo)
         let results = useCase.search("978-0553")
 
         XCTAssertEqual(results.count, 1)
@@ -44,7 +46,7 @@ final class BookManagementStepTests: XCTestCase {
         try bookRepo.save(Book(title: "The Infinite Library", author: "Jorge Borges", isbn: "978-1234567890", publicationYear: 2020))
         try bookRepo.save(Book(title: "Foundation", author: "Isaac Asimov", isbn: "978-0553293357", publicationYear: 1951))
 
-        let useCase = SearchBooksUseCase(bookRepository: bookRepo)
+        let useCase = SearchBooksUseCase(bookRepository: bookRepo, loanRepository: loanRepo)
         XCTAssertEqual(useCase.search("Asimov").count, 1)
     }
 

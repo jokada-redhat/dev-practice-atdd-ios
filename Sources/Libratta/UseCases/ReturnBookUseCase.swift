@@ -33,48 +33,16 @@ public final class ReturnBookUseCase: Sendable {
             return .error(message: "この書籍は別の会員が借りています")
         }
 
-        guard let member = memberRepository.findById(memberId) else {
-            return .error(message: "会員が見つかりません")
-        }
-
-        do {
-            try loanRepository.returnBook(loan.id)
-            try bookRepository.updateStatus(id: book.id, status: .available)
-            try memberRepository.updateLoanCount(id: member.id, loanCount: max(0, member.loanCount - 1))
-
-            if let updatedLoan = loanRepository.findById(loan.id) {
-                return .success(updatedLoan)
-            }
-            return .success(loan)
-        } catch {
-            return .error(message: "返却処理に失敗しました")
-        }
+        loanRepository.delete(loan.id)
+        return .success(loan)
     }
 
     public func executeByLoanId(_ loanId: String) -> ReturnBookResult {
-        guard let loan = loanRepository.findById(loanId), !loan.isReturned else {
+        guard let loan = loanRepository.findById(loanId) else {
             return .error(message: "貸出記録が見つかりません")
         }
 
-        guard let book = bookRepository.findById(loan.bookId) else {
-            return .error(message: "書籍が見つかりません")
-        }
-
-        guard let member = memberRepository.findById(loan.memberId) else {
-            return .error(message: "会員が見つかりません")
-        }
-
-        do {
-            try loanRepository.returnBook(loan.id)
-            try bookRepository.updateStatus(id: book.id, status: .available)
-            try memberRepository.updateLoanCount(id: member.id, loanCount: max(0, member.loanCount - 1))
-
-            if let updatedLoan = loanRepository.findById(loan.id) {
-                return .success(updatedLoan)
-            }
-            return .success(loan)
-        } catch {
-            return .error(message: "返却処理に失敗しました")
-        }
+        loanRepository.delete(loan.id)
+        return .success(loan)
     }
 }

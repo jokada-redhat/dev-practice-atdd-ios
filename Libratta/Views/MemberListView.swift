@@ -14,19 +14,22 @@ struct MemberListView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.members) { member in
-                        MemberCard(member: member)
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                onMemberSelected(member)
-                            }
-                            .accessibilityIdentifier("memberCard_\(member.id)")
+                        MemberCard(
+                            member: member,
+                            loanCount: viewModel.loanCount(for: member)
+                        )
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onMemberSelected(member)
+                        }
+                        .accessibilityIdentifier("memberCard_\(member.id)")
                     }
                 }
                 .padding(.horizontal, 24)
                 .padding(.top, 8)
             }
         }
-        .searchable(text: $viewModel.searchQuery, prompt: "名前・メール・IDで検索")
+        .searchable(text: $viewModel.searchQuery, prompt: "名前・IDで検索")
         .onChange(of: viewModel.searchQuery) { _, _ in
             viewModel.loadMembers()
         }
@@ -55,6 +58,7 @@ struct MemberListView: View {
 
 struct MemberCard: View {
     let member: Member
+    let loanCount: Int
 
     var body: some View {
         HStack {
@@ -69,8 +73,8 @@ struct MemberCard: View {
                     .fontWeight(.bold)
                     .foregroundStyle(AppTheme.onSurface)
 
-                if member.loanCount > 0 {
-                    Text("\(member.loanCount)冊 貸し出し中")
+                if loanCount > 0 {
+                    Text("\(loanCount)冊 貸し出し中")
                         .font(.caption2)
                         .fontWeight(.bold)
                         .foregroundStyle(AppTheme.primary)

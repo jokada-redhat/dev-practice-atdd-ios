@@ -17,12 +17,12 @@ final class BorrowingFlowStepTests: XCTestCase {
         returnUseCase = ReturnBookUseCase(memberRepository: memberRepo, bookRepository: bookRepo, loanRepository: loanRepo)
     }
 
-    private func setupMember(_ name: String, id: String, loanCount: Int = 0) throws {
-        try memberRepo.save(Member(id: id, name: name, email: "\(id)@example.com", loanCount: loanCount))
+    private func setupMember(_ name: String, id: String) throws {
+        try memberRepo.save(Member(id: id, name: name))
     }
 
-    private func setupBook(_ title: String, status: BookStatus = .available) throws {
-        try bookRepo.save(Book(title: title, author: "Author", isbn: UUID().uuidString, publicationYear: 2020, status: status))
+    private func setupBook(_ title: String) throws {
+        try bookRepo.save(Book(title: title, author: "Author", isbn: UUID().uuidString, publicationYear: 2020))
     }
 
     func test会員が書籍を借りる() throws {
@@ -35,14 +35,17 @@ final class BorrowingFlowStepTests: XCTestCase {
             XCTFail("貸出が成功するべき")
             return
         }
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .borrowed)
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 1)
+        let book = bookRepo.findByTitle("The Infinite Library")!
+        XCTAssertNotNil(loanRepo.findActiveByBookId(book.id))
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 1)
         XCTAssertEqual(loanRepo.findAll().count, 1)
     }
 
     func test既に借りられている書籍は借りられない() throws {
         try setupMember("山田太郎", id: "DA-8821")
-        try setupBook("Neuromancer", status: .borrowed)
+        try setupMember("田中次郎", id: "DA-1156")
+        try setupBook("Neuromancer")
+        _ = borrowUseCase.execute(memberId: "DA-1156", bookTitle: "Neuromancer")
 
         let result = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Neuromancer")
 
@@ -51,20 +54,16 @@ final class BorrowingFlowStepTests: XCTestCase {
             return
         }
         XCTAssertEqual(message, "この書籍は既に貸出中です")
-        XCTAssertEqual(bookRepo.findByTitle("Neuromancer")?.status, .borrowed)
     }
 
-    func test複数の書籍を借りる() throws {
+    func test複数の書籍を借りている会員の貸出冊数が正しい() throws {
         try setupMember("山田太郎", id: "DA-8821")
-        try setupBook("The Infinite Library")
-        try setupBook("Foundation")
+        try setupBook("Book A")
+        try setupBook("Book B")
+        _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Book A")
+        _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Book B")
 
-        _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
-        _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Foundation")
-
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 2)
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .borrowed)
-        XCTAssertEqual(bookRepo.findByTitle("Foundation")?.status, .borrowed)
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 2)
     }
 
     func test会員が書籍を返却する() throws {
@@ -72,15 +71,19 @@ final class BorrowingFlowStepTests: XCTestCase {
         try setupBook("The Infinite Library")
 
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
+        let loanCountBefore = loanRepo.findAll().count
+        XCTAssertEqual(loanCountBefore, 1)
+
         let result = returnUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
 
-        guard case let .success(loan) = result else {
+        guard case .success = result else {
             XCTFail("返却が成功するべき")
             return
         }
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .available)
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 0)
-        XCTAssertTrue(loan.isReturned)
+        let book = bookRepo.findByTitle("The Infinite Library")!
+        XCTAssertNil(loanRepo.findActiveByBookId(book.id))
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 0)
+        XCTAssertEqual(loanRepo.findAll().count, 0)
     }
 
     func test借りていない書籍は返却できない() throws {
@@ -125,11 +128,12 @@ final class BorrowingFlowStepTests: XCTestCase {
         try setupBook("The Infinite Library")
 
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .borrowed)
+        let book = bookRepo.findByTitle("The Infinite Library")!
+        XCTAssertNotNil(loanRepo.findActiveByBookId(book.id))
 
         _ = returnUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .available)
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 0)
+        XCTAssertNil(loanRepo.findActiveByBookId(book.id))
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 0)
     }
 
     func test別の会員が借りている書籍は返却できない() throws {

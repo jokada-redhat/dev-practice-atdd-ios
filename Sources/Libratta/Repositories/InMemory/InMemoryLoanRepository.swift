@@ -17,28 +17,24 @@ public final class InMemoryLoanRepository: LoanRepository, @unchecked Sendable {
         loans.values.filter { $0.memberId == memberId }
     }
 
-    public func findByBookId(_ bookId: String) -> [Loan] {
-        loans.values.filter { $0.bookId == bookId }
+    public func findByBookId(_ bookId: String) -> Loan? {
+        loans.values.first { $0.bookId == bookId }
     }
 
     public func findActiveByBookId(_ bookId: String) -> Loan? {
-        loans.values.first { $0.bookId == bookId && !$0.isReturned }
+        loans.values.first { $0.bookId == bookId }
     }
 
     public func findAll() -> [Loan] {
         Array(loans.values)
     }
 
-    public func findAllActive() -> [Loan] {
-        loans.values.filter { !$0.isReturned }
+    public func countActiveByMemberId(_ memberId: String) -> Int {
+        loans.values.filter { $0.memberId == memberId }.count
     }
 
-    public func returnBook(_ loanId: String) throws {
-        guard var loan = loans[loanId] else {
-            throw RepositoryError.notFound
-        }
-        loan.returnedDate = Date()
-        loans[loanId] = loan
+    public func findBorrowedBookIds() -> Set<String> {
+        Set(loans.values.map { $0.bookId })
     }
 
     public func delete(_ id: String) {

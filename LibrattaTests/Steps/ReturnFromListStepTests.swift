@@ -18,7 +18,7 @@ final class ReturnFromListStepTests: XCTestCase {
     }
 
     private func setupBackground() throws {
-        try memberRepo.save(Member(id: "DA-8821", name: "山田太郎", email: "yamada@example.com"))
+        try memberRepo.save(Member(id: "DA-8821", name: "山田太郎"))
         try bookRepo.save(Book(title: "The Infinite Library", author: "Author", isbn: "978-1234567890", publicationYear: 2020))
     }
 
@@ -26,17 +26,18 @@ final class ReturnFromListStepTests: XCTestCase {
         try setupBackground()
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
 
-        let activeLoan = loanRepo.findAllActive().first!
+        let activeLoan = loanRepo.findAll().first!
         let result = returnUseCase.executeByLoanId(activeLoan.id)
 
-        guard case let .success(loan) = result else {
+        guard case .success = result else {
             XCTFail("返却が成功するべき")
             return
         }
-        XCTAssertEqual(bookRepo.findByTitle("The Infinite Library")?.status, .available)
-        XCTAssertEqual(memberRepo.findById("DA-8821")?.loanCount, 0)
-        XCTAssertTrue(loan.isReturned)
-        XCTAssertTrue(loanRepo.findAllActive().isEmpty)
+        let book = bookRepo.findByTitle("The Infinite Library")!
+        XCTAssertNil(loanRepo.findActiveByBookId(book.id))
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 0)
+        XCTAssertNil(loanRepo.findById(activeLoan.id))
+        XCTAssertTrue(loanRepo.findAll().isEmpty)
     }
 
     func test返却後に貸出中の冊数表示が更新される() throws {
@@ -46,22 +47,22 @@ final class ReturnFromListStepTests: XCTestCase {
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Foundation")
 
-        let activeLoan = loanRepo.findAllActive().first { loan in
+        let activeLoan = loanRepo.findAll().first { loan in
             bookRepo.findById(loan.bookId)?.title == "The Infinite Library"
         }!
 
         _ = returnUseCase.executeByLoanId(activeLoan.id)
 
-        XCTAssertEqual(loanRepo.findAllActive().count, 1)
+        XCTAssertEqual(loanRepo.findAll().count, 1)
     }
 
     func test全て返却すると空状態が表示される() throws {
         try setupBackground()
         _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
 
-        let activeLoan = loanRepo.findAllActive().first!
+        let activeLoan = loanRepo.findAll().first!
         _ = returnUseCase.executeByLoanId(activeLoan.id)
 
-        XCTAssertTrue(loanRepo.findAllActive().isEmpty)
+        XCTAssertTrue(loanRepo.findAll().isEmpty)
     }
 }

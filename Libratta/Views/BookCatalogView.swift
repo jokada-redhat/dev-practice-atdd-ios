@@ -48,7 +48,11 @@ struct BookCatalogView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(viewModel.books) { book in
-                            CatalogBookCard(book: book) {
+                            let available = viewModel.isBookAvailable(book)
+                            CatalogBookCard(
+                                book: book,
+                                isAvailable: available
+                            ) {
                                 bookToBorrow = book
                             }
                             .accessibilityIdentifier("bookCard_\(book.isbn)")
@@ -100,14 +104,15 @@ struct BookCatalogView: View {
 
 struct CatalogBookCard: View {
     let book: Book
+    let isAvailable: Bool
     let onBorrow: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 StatusBadge(
-                    text: book.isAvailable ? "貸出可" : "貸出中",
-                    isAvailable: book.isAvailable
+                    text: isAvailable ? "貸出可" : "貸出中",
+                    isAvailable: isAvailable
                 )
                 Spacer()
             }
@@ -143,22 +148,20 @@ struct CatalogBookCard: View {
                 }
             }
 
-            if book.isAvailable {
+            if isAvailable {
                 HStack {
                     Spacer()
                     Button {
                         onBorrow()
                     } label: {
-                        HStack(spacing: 4) {
-                            Text("貸し出す")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                        }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(AppTheme.primaryGradient)
-                        .foregroundStyle(.white)
-                        .clipShape(Capsule())
+                        Text("貸し出す")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(AppTheme.primaryGradient)
+                            .foregroundStyle(.white)
+                            .clipShape(Capsule())
                     }
                     .accessibilityIdentifier("borrowButton_\(book.isbn)")
                 }

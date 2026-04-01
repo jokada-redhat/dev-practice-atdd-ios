@@ -35,10 +35,10 @@ final class ReturnBookViewModel: ObservableObject {
     }
 
     func loadLoans() {
-        let activeLoans = loanRepository.findAllActive()
+        let allLoans = loanRepository.findAll()
         var items: [LoanedItem] = []
 
-        for loan in activeLoans {
+        for loan in allLoans {
             guard let book = bookRepository.findById(loan.bookId),
                   let member = memberRepository.findById(loan.memberId) else { continue }
 

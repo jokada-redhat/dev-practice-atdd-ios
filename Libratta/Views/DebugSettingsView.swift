@@ -79,7 +79,7 @@ struct DebugSettingsView: View {
     private func updateCounts() {
         bookCount = deps.bookRepository.findAll().count
         memberCount = deps.memberRepository.findAll().count
-        loanCount = deps.loanRepository.findAllActive().count
+        loanCount = deps.loanRepository.findAll().count
     }
 
     private func loadDummyData() {

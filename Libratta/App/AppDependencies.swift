@@ -52,7 +52,7 @@ final class AppDependencies: ObservableObject {
     }
 
     var searchBooksUseCase: SearchBooksUseCase {
-        SearchBooksUseCase(bookRepository: bookRepository)
+        SearchBooksUseCase(bookRepository: bookRepository, loanRepository: loanRepository)
     }
 
     var registerBookUseCase: RegisterBookUseCase {
@@ -78,7 +78,11 @@ final class AppDependencies: ObservableObject {
     // MARK: - ViewModels
 
     func makeLoginViewModel() -> LoginViewModel {
-        LoginViewModel(loginUseCase: loginUseCase, sessionManager: sessionManager, isDebugMode: isDebugMode)
+        LoginViewModel(
+            loginUseCase: loginUseCase,
+            sessionManager: sessionManager,
+            isDebugMode: isDebugMode
+        )
     }
 
     func makeTopViewModel() -> TopViewModel {
@@ -86,7 +90,10 @@ final class AppDependencies: ObservableObject {
     }
 
     func makeMemberListViewModel() -> MemberListViewModel {
-        MemberListViewModel(listMembersUseCase: listMembersUseCase)
+        MemberListViewModel(
+            listMembersUseCase: listMembersUseCase,
+            loanRepository: loanRepository
+        )
     }
 
     func makeAddMemberViewModel() -> AddMemberViewModel {
@@ -96,7 +103,8 @@ final class AppDependencies: ObservableObject {
     func makeBookCatalogViewModel() -> BookCatalogViewModel {
         BookCatalogViewModel(
             searchBooksUseCase: searchBooksUseCase,
-            borrowBookUseCase: borrowBookUseCase
+            borrowBookUseCase: borrowBookUseCase,
+            loanRepository: loanRepository
         )
     }
 

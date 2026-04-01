@@ -18,7 +18,6 @@ struct AddMemberView: View {
                                 .disabled(true)
                         }
 
-                        // Auto-generate checkbox
                         Toggle("自動生成する", isOn: .constant(true))
                             .font(.subheadline)
                             .foregroundStyle(AppTheme.onSurface)
@@ -27,15 +26,6 @@ struct AddMemberView: View {
                         StitchFormField(label: "氏名", icon: "person") {
                             TextField("", text: $viewModel.name)
                                 .accessibilityIdentifier("nameField")
-                        }
-
-                        StitchFormField(label: "メールアドレス", icon: "envelope") {
-                            TextField("", text: $viewModel.email)
-                                .textContentType(.emailAddress)
-                                .keyboardType(.emailAddress)
-                                .autocorrectionDisabled()
-                                .textInputAutocapitalization(.never)
-                                .accessibilityIdentifier("emailField")
                         }
                     }
                     .padding(24)

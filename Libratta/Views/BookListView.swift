@@ -11,7 +11,6 @@ struct BookListView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Count & Filter Bar
                 HStack {
                     Text("\(viewModel.books.count)冊の書籍")
                         .font(.caption)
@@ -21,7 +20,6 @@ struct BookListView: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
 
-                // Book List
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(viewModel.books) { book in
@@ -65,16 +63,9 @@ struct BookListCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(book.title)
-                    .font(.headline)
-                    .foregroundStyle(AppTheme.onSurface)
-                Spacer()
-                StatusBadge(
-                    text: book.isAvailable ? "貸出可" : "貸出中",
-                    isAvailable: book.isAvailable
-                )
-            }
+            Text(book.title)
+                .font(.headline)
+                .foregroundStyle(AppTheme.onSurface)
 
             Text(book.author)
                 .font(.subheadline)

@@ -3,7 +3,6 @@ import SwiftUI
 @MainActor
 final class AddMemberViewModel: ObservableObject {
     @Published var name = ""
-    @Published var email = ""
     @Published var errorMessage: String?
     @Published var isSuccess = false
 
@@ -14,7 +13,7 @@ final class AddMemberViewModel: ObservableObject {
     }
 
     func register() {
-        let result = registerMemberUseCase.execute(name: name, email: email)
+        let result = registerMemberUseCase.execute(name: name)
         switch result {
         case .success:
             isSuccess = true
