@@ -132,13 +132,12 @@ struct LoanConfirmationView: View {
     }
 
     private func startCountdown() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if countdown > 0 {
+        Task {
+            while countdown > 0 {
+                try? await Task.sleep(for: .seconds(1))
                 countdown -= 1
-            } else {
-                timer.invalidate()
-                onDone()
             }
+            onDone()
         }
     }
 }
