@@ -136,6 +136,17 @@
 		C49A0BACA2A2075DBB698C6D /* MemberListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListView.swift; sourceTree = "<group>"; };
 		C8A71A9F45D8D6698FFB438E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CC4349A96423AB523D060A1E /* LibrattaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrattaUITests.swift; sourceTree = "<group>"; };
+		D0270E092F7DF33800F96A89 /* book_catalog.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = book_catalog.feature; sourceTree = "<group>"; };
+		D0270E0A2F7DF33800F96A89 /* book_management.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = book_management.feature; sourceTree = "<group>"; };
+		D0270E0B2F7DF33800F96A89 /* borrowing_flow.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = borrowing_flow.feature; sourceTree = "<group>"; };
+		D0270E0C2F7DF33800F96A89 /* login.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = login.feature; sourceTree = "<group>"; };
+		D0270E0D2F7DF33800F96A89 /* login_api.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = login_api.feature; sourceTree = "<group>"; };
+		D0270E0E2F7DF33800F96A89 /* member_management.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = member_management.feature; sourceTree = "<group>"; };
+		D0270E0F2F7DF33800F96A89 /* return_book.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = return_book.feature; sourceTree = "<group>"; };
+		D0270E102F7DF33800F96A89 /* return_from_list.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = return_from_list.feature; sourceTree = "<group>"; };
+		D0270E112F7DF33800F96A89 /* sample.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.feature; sourceTree = "<group>"; };
+		D0270E122F7DF33800F96A89 /* session.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = session.feature; sourceTree = "<group>"; };
+		D0270E132F7DF33800F96A89 /* skip_auth.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = skip_auth.feature; sourceTree = "<group>"; };
 		D298900764EE755668971166 /* LoginApiStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiStepTests.swift; sourceTree = "<group>"; };
 		D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -305,6 +316,24 @@
 			);
 			sourceTree = "<group>";
 		};
+		D0270E142F7DF33800F96A89 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D0270E092F7DF33800F96A89 /* book_catalog.feature */,
+				D0270E0A2F7DF33800F96A89 /* book_management.feature */,
+				D0270E0B2F7DF33800F96A89 /* borrowing_flow.feature */,
+				D0270E0C2F7DF33800F96A89 /* login.feature */,
+				D0270E0D2F7DF33800F96A89 /* login_api.feature */,
+				D0270E0E2F7DF33800F96A89 /* member_management.feature */,
+				D0270E0F2F7DF33800F96A89 /* return_book.feature */,
+				D0270E102F7DF33800F96A89 /* return_from_list.feature */,
+				D0270E112F7DF33800F96A89 /* sample.feature */,
+				D0270E122F7DF33800F96A89 /* session.feature */,
+				D0270E132F7DF33800F96A89 /* skip_auth.feature */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		D439BEB09A1840F083FD7B00 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +362,7 @@
 		EB4D4282BF5DC8B90192A4A7 /* LibrattaTests */ = {
 			isa = PBXGroup;
 			children = (
+				D0270E142F7DF33800F96A89 /* Features */,
 				911F60F49122D23F99E9CDD4 /* Info.plist */,
 				14E7AE16660C753B233132E6 /* Steps */,
 				A88C2D92A306C5120197C6EB /* Support */,
