@@ -147,6 +147,10 @@
 		D0270E112F7DF33800F96A89 /* sample.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = sample.feature; sourceTree = "<group>"; };
 		D0270E122F7DF33800F96A89 /* session.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = session.feature; sourceTree = "<group>"; };
 		D0270E132F7DF33800F96A89 /* skip_auth.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = skip_auth.feature; sourceTree = "<group>"; };
+		D0270E152F7E5A7500F96A89 /* book_catalog_ui.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = book_catalog_ui.feature; sourceTree = "<group>"; };
+		D0270E162F7E5A7500F96A89 /* borrowing_flow_ui.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = borrowing_flow_ui.feature; sourceTree = "<group>"; };
+		D0270E172F7E5A7500F96A89 /* login_ui.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = login_ui.feature; sourceTree = "<group>"; };
+		D0270E182F7E5A7500F96A89 /* member_ui.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = member_ui.feature; sourceTree = "<group>"; };
 		D298900764EE755668971166 /* LoginApiStepTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiStepTests.swift; sourceTree = "<group>"; };
 		D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 		1D3556A222DF6315A724EBB7 /* LibrattaUITests */ = {
 			isa = PBXGroup;
 			children = (
+				D0270E192F7E5A7500F96A89 /* Features */,
 				C8A71A9F45D8D6698FFB438E /* Info.plist */,
 				CC4349A96423AB523D060A1E /* LibrattaUITests.swift */,
 			);
@@ -330,6 +335,17 @@
 				D0270E112F7DF33800F96A89 /* sample.feature */,
 				D0270E122F7DF33800F96A89 /* session.feature */,
 				D0270E132F7DF33800F96A89 /* skip_auth.feature */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D0270E192F7E5A7500F96A89 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D0270E152F7E5A7500F96A89 /* book_catalog_ui.feature */,
+				D0270E162F7E5A7500F96A89 /* borrowing_flow_ui.feature */,
+				D0270E172F7E5A7500F96A89 /* login_ui.feature */,
+				D0270E182F7E5A7500F96A89 /* member_ui.feature */,
 			);
 			path = Features;
 			sourceTree = "<group>";

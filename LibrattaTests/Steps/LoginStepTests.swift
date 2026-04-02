@@ -11,7 +11,7 @@ final class LoginStepTests: XCTestCase {
         loginUseCase = LoginUseCase(authRepository: stubAuth)
     }
 
-    func test正しい認証情報でログインできる() async {
+    func testSmoke_正しい認証情報でログインできる() async {
         stubAuth.registerUser(email: "test@example.com", password: "password123", displayName: "テストユーザー")
 
         let result = await loginUseCase.execute(request: LoginRequest(email: "test@example.com", password: "password123"))

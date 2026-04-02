@@ -29,7 +29,7 @@ final class ReturnBookStepTests: XCTestCase {
         _ = borrowUseCase.execute(memberId: "DA-1156", bookTitle: "Neuromancer")
     }
 
-    func test全ての貸出中書籍が一覧表示される() throws {
+    func testSmoke_全ての貸出中書籍が一覧表示される() throws {
         try setupBackground()
         XCTAssertEqual(loanRepo.findAll().count, 3)
     }

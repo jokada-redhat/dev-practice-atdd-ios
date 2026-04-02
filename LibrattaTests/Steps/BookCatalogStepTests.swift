@@ -29,7 +29,7 @@ final class BookCatalogStepTests: XCTestCase {
         try loanRepo.save(Loan(memberId: "DA-0001", bookId: book.id))
     }
 
-    func test全書籍を表示する() throws {
+    func testSmoke_全書籍を表示する() throws {
         try setupFourBooks()
         try markBookAsBorrowed("Neuromancer")
         let useCase = SearchBooksUseCase(bookRepository: bookRepo, loanRepository: loanRepo)

@@ -4,7 +4,7 @@ import XCTest
 /// Feature: セッション管理機能 (session.feature)
 final class SessionStepTests: XCTestCase {
 
-    func testログイン成功時にセッションが保存される() {
+    func testSmoke_ログイン成功時にセッションが保存される() {
         let sessionManager = SessionManager(repository: InMemorySessionRepository())
 
         XCTAssertFalse(sessionManager.isLoggedIn)

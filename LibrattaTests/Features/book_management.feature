@@ -1,6 +1,7 @@
 Feature: 書籍管理
   書籍の一覧表示と新規登録ができる
 
+  @smoke
   Scenario: 登録済みの書籍が一覧表示される
     Given 書籍管理に以下の書籍が登録されている:
       | title               | author        | isbn               | year |

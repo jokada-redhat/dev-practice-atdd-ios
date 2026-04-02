@@ -25,7 +25,7 @@ final class BorrowingFlowStepTests: XCTestCase {
         try bookRepo.save(Book(title: title, author: "Author", isbn: UUID().uuidString, publicationYear: 2020))
     }
 
-    func test会員が書籍を借りる() throws {
+    func testSmoke_会員が書籍を借りる() throws {
         try setupMember("山田太郎", id: "DA-8821")
         try setupBook("The Infinite Library")
 

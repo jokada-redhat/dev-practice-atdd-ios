@@ -11,7 +11,7 @@ final class BookManagementStepTests: XCTestCase {
         loanRepo = InMemoryLoanRepository()
     }
 
-    func test登録済みの書籍が一覧表示される() throws {
+    func testSmoke_登録済みの書籍が一覧表示される() throws {
         try bookRepo.save(Book(title: "The Infinite Library", author: "Jorge Borges", isbn: "978-1234567890", publicationYear: 2020))
         try bookRepo.save(Book(title: "Foundation", author: "Isaac Asimov", isbn: "978-0553293357", publicationYear: 1951))
         try bookRepo.save(Book(title: "Neuromancer", author: "William Gibson", isbn: "978-0441569595", publicationYear: 1984))

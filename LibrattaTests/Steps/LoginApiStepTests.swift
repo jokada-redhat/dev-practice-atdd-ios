@@ -4,7 +4,7 @@ import XCTest
 /// Feature: ログインAPI (login_api.feature)
 final class LoginApiStepTests: XCTestCase {
 
-    func test正しい認証情報でトークンが返る() async {
+    func testSmoke_正しい認証情報でトークンが返る() async {
         let mockSession = MockURLProtocolSession.create { request in
             let body = try? JSONSerialization.jsonObject(with: request.httpBody ?? Data()) as? [String: Any]
             let email = body?["email"] as? String

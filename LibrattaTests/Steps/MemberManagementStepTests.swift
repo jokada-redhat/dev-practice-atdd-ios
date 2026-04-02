@@ -11,7 +11,7 @@ final class MemberManagementStepTests: XCTestCase {
         loanRepo = InMemoryLoanRepository()
     }
 
-    func test新規会員を登録する() {
+    func testSmoke_新規会員を登録する() {
         let useCase = RegisterMemberUseCase(memberRepository: memberRepo)
         let result = useCase.execute(name: "山田太郎")
 
