@@ -11,6 +11,7 @@ extension Cucumber: StepImplementation {
         let app = XCUIApplication()
 
         BeforeScenario { _ in
+            app.terminate()
             app.launch()
         }
 

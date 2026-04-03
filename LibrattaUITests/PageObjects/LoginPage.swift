@@ -10,27 +10,24 @@ struct LoginPage {
     func login(email: String, password: String) {
         XCTAssertTrue(emailField.waitForExistence(timeout: 10))
 
-        // デバッグモードで prefill されている場合はクリアしてから入力
-        emailField.tap()
-        if let currentValue = emailField.value as? String, !currentValue.isEmpty {
-            emailField.press(forDuration: 1.0)
-            if app.menuItems["Select All"].waitForExistence(timeout: 2) {
-                app.menuItems["Select All"].tap()
-            }
+        let currentEmail = emailField.value as? String ?? ""
+        if currentEmail == email {
+            // prefill が一致 → そのままログイン
+            loginButton.tap()
+        } else {
+            // 値が違う場合はクリアして入力
+            clearAndType(field: emailField, text: email)
+            clearAndType(field: passwordField, text: password)
+            loginButton.tap()
         }
-        emailField.typeText(email)
 
-        passwordField.tap()
-        if let currentValue = passwordField.value as? String,
-           !currentValue.isEmpty, currentValue != "パスワード" {
-            passwordField.press(forDuration: 1.0)
-            if app.menuItems["Select All"].waitForExistence(timeout: 2) {
-                app.menuItems["Select All"].tap()
-            }
-        }
-        passwordField.typeText(password)
-
-        loginButton.tap()
+        // ログイン完了（TopView 表示 or エラー表示）を待つ
+        let displayName = app.staticTexts["displayName"]
+        let errorMessage = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS 'パスワード'")
+        ).firstMatch
+        _ = displayName.waitForExistence(timeout: 15)
+            || errorMessage.waitForExistence(timeout: 1)
     }
 
     func verifyError(_ message: String) {
@@ -38,5 +35,11 @@ struct LoginPage {
             app.staticTexts[message].waitForExistence(timeout: 10),
             "エラーメッセージ '\(message)' が表示されていません"
         )
+    }
+
+    private func clearAndType(field: XCUIElement, text: String) {
+        field.tap()
+        field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
+        field.typeText(text)
     }
 }

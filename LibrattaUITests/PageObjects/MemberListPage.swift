@@ -22,9 +22,6 @@ struct MemberListPage {
     }
 
     func tapMember(_ name: String) {
-        // accessibilityIdentifier で会員カードを探してタップ
-        // MemberCard の ID 形式は memberCard_{memberId} だが、
-        // name から直接 ID を取得できないので staticTexts でタップ
         let element = app.staticTexts[name]
         if !element.waitForExistence(timeout: 5) {
             app.swipeUp()
@@ -32,5 +29,8 @@ struct MemberListPage {
         XCTAssertTrue(element.waitForExistence(timeout: 5),
                       "会員 '\(name)' が見つかりません")
         element.tap()
+
+        // 書籍カタログ画面への遷移を待つ
+        _ = app.navigationBars["書籍カタログ"].waitForExistence(timeout: 15)
     }
 }
