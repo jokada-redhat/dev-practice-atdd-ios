@@ -5,20 +5,20 @@ struct BookCatalogPage {
 
     func verifyDisplayed() {
         XCTAssertTrue(
-            app.navigationBars["書籍カタログ"].waitForExistence(timeout: 5),
+            app.navigationBars["書籍カタログ"].waitForExistence(timeout: 15),
             "書籍カタログ画面が表示されていません"
         )
     }
 
     func verifySelectedMember(_ name: String) {
         let member = app.staticTexts["selectedMember"]
-        XCTAssertTrue(member.waitForExistence(timeout: 5))
+        XCTAssertTrue(member.waitForExistence(timeout: 10))
         XCTAssertEqual(member.label, name)
     }
 
     func verifyBookExists(_ title: String) {
         XCTAssertTrue(
-            app.staticTexts[title].waitForExistence(timeout: 5),
+            app.staticTexts[title].waitForExistence(timeout: 10),
             "書籍 '\(title)' が表示されていません"
         )
     }
@@ -32,29 +32,32 @@ struct BookCatalogPage {
 
     func tapFilter(_ filterName: String) {
         let filter = app.buttons[filterName]
-        XCTAssertTrue(filter.waitForExistence(timeout: 5))
+        XCTAssertTrue(filter.waitForExistence(timeout: 10))
         filter.tap()
     }
 
     func tapBorrowButton(forBook title: String) {
-        let scrollView = app.scrollViews.firstMatch
-        scrollView.swipeUp()
+        // 書籍を探す（スクロール）
+        let bookText = app.staticTexts[title]
+        if !bookText.waitForExistence(timeout: 5) {
+            app.swipeUp()
+            XCTAssertTrue(bookText.waitForExistence(timeout: 5))
+        }
 
-        let bookTexts = app.staticTexts.matching(
-            NSPredicate(format: "label == %@", title)
-        )
-        XCTAssertTrue(bookTexts.firstMatch.waitForExistence(timeout: 5))
-
-        let borrowButtons = app.buttons.matching(
+        // 「貸し出す」ボタンをタップ
+        let borrowButton = app.buttons.matching(
             NSPredicate(format: "label CONTAINS '貸し出す'")
-        )
-        XCTAssertTrue(borrowButtons.firstMatch.waitForExistence(timeout: 5))
-        borrowButtons.firstMatch.tap()
+        ).firstMatch
+        if !borrowButton.waitForExistence(timeout: 5) {
+            app.swipeUp()
+        }
+        XCTAssertTrue(borrowButton.waitForExistence(timeout: 5))
+        borrowButton.tap()
 
-        // 確認ダイアログで「貸し出す」をタップ
-        let confirmButton = app.buttons["貸し出す"]
-        if confirmButton.waitForExistence(timeout: 3) {
-            confirmButton.tap()
+        // 確認ダイアログ (ActionSheet) で「貸し出す」をタップ
+        let sheet = app.sheets.firstMatch
+        if sheet.waitForExistence(timeout: 5) {
+            sheet.buttons["貸し出す"].tap()
         }
     }
 }

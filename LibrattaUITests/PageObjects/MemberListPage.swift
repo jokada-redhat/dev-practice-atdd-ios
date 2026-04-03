@@ -11,7 +11,6 @@ struct MemberListPage {
     }
 
     func verifyMemberExists(_ name: String) {
-        // スクロールして要素を探す
         let element = app.staticTexts[name]
         if !element.waitForExistence(timeout: 3) {
             app.swipeUp()
@@ -23,11 +22,15 @@ struct MemberListPage {
     }
 
     func tapMember(_ name: String) {
+        // accessibilityIdentifier で会員カードを探してタップ
+        // MemberCard の ID 形式は memberCard_{memberId} だが、
+        // name から直接 ID を取得できないので staticTexts でタップ
         let element = app.staticTexts[name]
-        if !element.waitForExistence(timeout: 3) {
+        if !element.waitForExistence(timeout: 5) {
             app.swipeUp()
         }
-        XCTAssertTrue(element.waitForExistence(timeout: 5))
+        XCTAssertTrue(element.waitForExistence(timeout: 5),
+                      "会員 '\(name)' が見つかりません")
         element.tap()
     }
 }

@@ -23,6 +23,9 @@ extension Cucumber: StepImplementation {
         Given("メールアドレス {string} がパスワード {string} で登録されている") { _, _ in
             // テスト用アカウントはアプリ側で事前登録済み
         }
+        And("メールアドレス {string} がパスワード {string} で登録されている") { _, _ in
+            // And でも同じ
+        }
 
         When("メールアドレス {string} とパスワード {string} でログインする") { matches, _ in
             let email = matches[1]
@@ -36,6 +39,9 @@ extension Cucumber: StepImplementation {
         }
 
         Then("ログアウトボタンが表示されている") { _, _ in
+            TopPage(app: app).verifyLogoutButtonExists()
+        }
+        And("ログアウトボタンが表示されている") { _, _ in
             TopPage(app: app).verifyLogoutButtonExists()
         }
 
@@ -68,6 +74,10 @@ extension Cucumber: StepImplementation {
             let name = matches[1]
             MemberListPage(app: app).verifyMemberExists(name)
         }
+        And("会員 {string} のカードが表示されている") { matches, _ in
+            let name = matches[1]
+            MemberListPage(app: app).verifyMemberExists(name)
+        }
 
         Given("会員一覧画面が表示されている") { _, _ in
             LoginPage(app: app).login(
@@ -82,6 +92,10 @@ extension Cucumber: StepImplementation {
             let name = matches[1]
             MemberListPage(app: app).tapMember(name)
         }
+        And("会員 {string} のカードをタップする") { matches, _ in
+            let name = matches[1]
+            MemberListPage(app: app).tapMember(name)
+        }
 
         // MARK: - Book Catalog Steps
 
@@ -90,6 +104,10 @@ extension Cucumber: StepImplementation {
         }
 
         Then("選択中メンバー {string} が表示されている") { matches, _ in
+            let name = matches[1]
+            BookCatalogPage(app: app).verifySelectedMember(name)
+        }
+        And("選択中メンバー {string} が表示されている") { matches, _ in
             let name = matches[1]
             BookCatalogPage(app: app).verifySelectedMember(name)
         }
@@ -109,8 +127,16 @@ extension Cucumber: StepImplementation {
             let title = matches[1]
             BookCatalogPage(app: app).verifyBookExists(title)
         }
+        And("書籍 {string} のカードが表示されている") { matches, _ in
+            let title = matches[1]
+            BookCatalogPage(app: app).verifyBookExists(title)
+        }
 
         Then("書籍 {string} のカードが表示されていない") { matches, _ in
+            let title = matches[1]
+            BookCatalogPage(app: app).verifyBookNotExists(title)
+        }
+        And("書籍 {string} のカードが表示されていない") { matches, _ in
             let title = matches[1]
             BookCatalogPage(app: app).verifyBookNotExists(title)
         }
@@ -123,6 +149,10 @@ extension Cucumber: StepImplementation {
         // MARK: - Borrowing Flow Steps
 
         When("書籍 {string} の貸し出しボタンをタップする") { matches, _ in
+            let title = matches[1]
+            BookCatalogPage(app: app).tapBorrowButton(forBook: title)
+        }
+        And("書籍 {string} の貸し出しボタンをタップする") { matches, _ in
             let title = matches[1]
             BookCatalogPage(app: app).tapBorrowButton(forBook: title)
         }
