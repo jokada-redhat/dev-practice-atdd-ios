@@ -4,7 +4,6 @@ struct TopPage {
     let app: XCUIApplication
 
     func verifyDisplayed() {
-        // navigationBars と displayName のどちらかで確認
         let navBar = app.navigationBars["Libratta"]
         let displayName = app.staticTexts["displayName"]
         let found = navBar.waitForExistence(timeout: 15)
@@ -22,11 +21,16 @@ struct TopPage {
     }
 
     func verifyLogoutButtonExists() {
-        // displayName が見つかればトップ画面は表示済み
-        let element = app.staticTexts["displayName"]
+        // 新しい XCUIApplication インスタンスでクエリし直す
+        let freshApp = XCUIApplication()
+        let allTexts = freshApp.staticTexts.allElementsBoundByIndex
+        let textLabels = allTexts.map { "\($0.identifier)='\($0.label)'" }
+        let debugInfo = "staticTexts: \(textLabels.joined(separator: ", "))"
+
+        let element = freshApp.staticTexts["displayName"]
         XCTAssertTrue(
             element.waitForExistence(timeout: 15),
-            "トップ画面が表示されていません（ログアウト確認）"
+            "トップ画面が表示されていません（ログアウト確認）。\(debugInfo)"
         )
     }
 
