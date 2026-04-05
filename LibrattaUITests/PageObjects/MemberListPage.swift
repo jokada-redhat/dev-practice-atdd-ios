@@ -13,7 +13,10 @@ struct MemberListPage {
     func verifyMemberExists(_ name: String) {
         let element = app.staticTexts[name]
         if !element.waitForExistence(timeout: 3) {
-            app.swipeUp()
+            for _ in 0..<5 {
+                app.swipeUp()
+                if element.waitForExistence(timeout: 2) { break }
+            }
         }
         XCTAssertTrue(
             element.waitForExistence(timeout: 5),
@@ -24,7 +27,10 @@ struct MemberListPage {
     func tapMember(_ name: String) {
         let element = app.staticTexts[name]
         if !element.waitForExistence(timeout: 5) {
-            app.swipeUp()
+            for _ in 0..<5 {
+                app.swipeUp()
+                if element.waitForExistence(timeout: 2) { break }
+            }
         }
         XCTAssertTrue(element.waitForExistence(timeout: 5),
                       "会員 '\(name)' が見つかりません")

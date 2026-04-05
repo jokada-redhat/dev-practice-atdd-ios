@@ -14,7 +14,7 @@ public final class InMemoryMemberRepository: MemberRepository, @unchecked Sendab
     }
 
     public func findAll() -> [Member] {
-        Array(members.values)
+        Array(members.values).sorted { $0.id < $1.id }
     }
 
     public func search(_ query: String) -> [Member] {
