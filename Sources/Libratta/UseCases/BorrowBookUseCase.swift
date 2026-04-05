@@ -6,6 +6,8 @@ public enum BorrowBookResult: Equatable {
 }
 
 public final class BorrowBookUseCase: Sendable {
+    private static let borrowingLimit = 3
+
     private let memberRepository: MemberRepository
     private let bookRepository: BookRepository
     private let loanRepository: LoanRepository
@@ -23,6 +25,11 @@ public final class BorrowBookUseCase: Sendable {
     public func execute(memberId: String, bookTitle: String) -> BorrowBookResult {
         guard memberRepository.findById(memberId) != nil else {
             return .error(message: "会員が見つかりません")
+        }
+
+        let activeLoanCount = loanRepository.countActiveByMemberId(memberId)
+        if activeLoanCount >= Self.borrowingLimit {
+            return .error(message: "貸出上限（\(Self.borrowingLimit)冊）に達しています")
         }
 
         guard let book = bookRepository.findByTitle(bookTitle) else {

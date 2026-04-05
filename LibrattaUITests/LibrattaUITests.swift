@@ -126,6 +126,12 @@ extension Cucumber: StepImplementation {
 
         // MARK: - Borrowing Flow Steps
 
+        Given("^会員 \"(.+)\" の貸出冊数を上限に設定する$") { _, _ in
+            app.terminate()
+            app.launchArguments.append("--set-borrowing-limit-test")
+            app.launch()
+        }
+
         When("^書籍 \"(.+)\" の貸し出しボタンをタップする$") { matches, _ in
             let title = matches[1]
             BookCatalogPage(app: app).tapBorrowButton(forBook: title)
@@ -133,6 +139,14 @@ extension Cucumber: StepImplementation {
 
         Then("貸し出し成功メッセージが表示される") { _, _ in
             LoanConfirmationPage(app: app).verifyDisplayed()
+        }
+
+        Then("貸し出しエラーメッセージが表示される") { _, _ in
+            let alert = app.alerts["エラー"]
+            XCTAssertTrue(
+                alert.waitForExistence(timeout: 10),
+                "貸し出しエラーアラートが表示されていません"
+            )
         }
     }
 }

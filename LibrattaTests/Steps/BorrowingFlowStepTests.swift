@@ -25,6 +25,14 @@ final class BorrowingFlowStepTests: XCTestCase {
         try bookRepo.save(Book(title: title, author: "Author", isbn: UUID().uuidString, publicationYear: 2020))
     }
 
+    private func setupBorrowedBooks(memberId: String, count: Int) throws {
+        for i in 0..<count {
+            let title = "Borrowed Book \(i + 1)"
+            try setupBook(title)
+            _ = borrowUseCase.execute(memberId: memberId, bookTitle: title)
+        }
+    }
+
     func testSmoke_会員が書籍を借りる() throws {
         try setupMember("山田太郎", id: "DA-8821")
         try setupBook("The Infinite Library")
@@ -149,5 +157,55 @@ final class BorrowingFlowStepTests: XCTestCase {
             return
         }
         XCTAssertEqual(message, "この書籍は別の会員が借りています")
+    }
+
+    // MARK: - 貸出上限
+
+    func test貸出上限ぴったりまで借りられる() throws {
+        try setupMember("山田太郎", id: "DA-8821")
+        try setupBorrowedBooks(memberId: "DA-8821", count: 2)
+        try setupBook("Neuromancer")
+
+        let result = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Neuromancer")
+
+        guard case .success = result else {
+            XCTFail("貸出が成功するべき")
+            return
+        }
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 3)
+    }
+
+    func test貸出上限に達している場合は借りられない() throws {
+        try setupMember("山田太郎", id: "DA-8821")
+        try setupBorrowedBooks(memberId: "DA-8821", count: 3)
+        try setupBook("Neuromancer")
+
+        let result = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Neuromancer")
+
+        guard case let .error(message) = result else {
+            XCTFail("エラーが返されるべき")
+            return
+        }
+        XCTAssertEqual(message, "貸出上限（3冊）に達しています")
+    }
+
+    func test返却すれば再び借りられる() throws {
+        try setupMember("山田太郎", id: "DA-8821")
+        try setupBorrowedBooks(memberId: "DA-8821", count: 2)
+        try setupBook("The Infinite Library")
+        _ = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 3)
+
+        _ = returnUseCase.execute(memberId: "DA-8821", bookTitle: "The Infinite Library")
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 2)
+
+        try setupBook("Dune")
+        let result = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "Dune")
+
+        guard case .success = result else {
+            XCTFail("貸出が成功するべき")
+            return
+        }
+        XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 3)
     }
 }
