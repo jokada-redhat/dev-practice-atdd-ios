@@ -14,14 +14,15 @@ struct MemberListView: View {
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.members) { member in
-                        MemberCard(
-                            member: member,
-                            loanCount: viewModel.loanCount(for: member)
-                        )
-                        .contentShape(Rectangle())
-                        .onTapGesture {
+                        Button {
                             onMemberSelected(member)
+                        } label: {
+                            MemberCard(
+                                member: member,
+                                loanCount: viewModel.loanCount(for: member)
+                            )
                         }
+                        .buttonStyle(.plain)
                         .accessibilityIdentifier("memberCard_\(member.id)")
                     }
                 }
