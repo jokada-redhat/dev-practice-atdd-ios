@@ -20,18 +20,10 @@ extension Cucumber: StepImplementation {
         Given("未ログイン状態になっている") { _, _ in
         }
 
-        When("正しい認証情報でログインする") { _, _ in
-            LoginPage(app: app).login(
-                email: "test@example.com",
-                password: "pass123"
-            )
-        }
-
-        When("誤ったパスワードでログインする") { _, _ in
-            LoginPage(app: app).login(
-                email: "test@example.com",
-                password: "wrongpass"
-            )
+        When("メールアドレス {string} とパスワード {string} でログインする") { matches, _ in
+            let email = matches[1]
+            let password = matches[2]
+            LoginPage(app: app).login(email: email, password: password)
         }
 
         Then("表示名 {string} がトップページに表示されている") { matches, _ in
@@ -52,8 +44,8 @@ extension Cucumber: StepImplementation {
 
         Given("トップ画面が表示されている") { _, _ in
             LoginPage(app: app).login(
-                email: "test@example.com",
-                password: "pass123"
+                email: "librarian@example.com",
+                password: "password"
             )
             TopPage(app: app).verifyDisplayed()
         }
@@ -75,8 +67,8 @@ extension Cucumber: StepImplementation {
 
         Given("会員一覧画面が表示されている") { _, _ in
             LoginPage(app: app).login(
-                email: "test@example.com",
-                password: "pass123"
+                email: "librarian@example.com",
+                password: "password"
             )
             TopPage(app: app).tapBorrowingCard()
             MemberListPage(app: app).verifyDisplayed()
@@ -101,8 +93,8 @@ extension Cucumber: StepImplementation {
         Given("書籍カタログ画面が会員 {string} で表示されている") { matches, _ in
             let memberName = matches[1]
             LoginPage(app: app).login(
-                email: "test@example.com",
-                password: "pass123"
+                email: "librarian@example.com",
+                password: "password"
             )
             TopPage(app: app).tapBorrowingCard()
             MemberListPage(app: app).tapMember(memberName)
@@ -131,7 +123,11 @@ extension Cucumber: StepImplementation {
             BookCatalogPage(app: app).tapBorrowButton(forBook: title)
         }
 
-        Then("貸し出し成功メッセージが表示される") { _, _ in
+        When("貸し出し確認ダイアログで「貸し出す」をタップする") { _, _ in
+            BookCatalogPage(app: app).confirmBorrowDialog()
+        }
+
+        Then("貸し出し確認画面が表示される") { _, _ in
             LoanConfirmationPage(app: app).verifyDisplayed()
         }
     }

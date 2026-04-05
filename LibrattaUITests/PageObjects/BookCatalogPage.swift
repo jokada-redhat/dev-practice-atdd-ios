@@ -53,11 +53,11 @@ struct BookCatalogPage {
         }
         XCTAssertTrue(borrowButton.waitForExistence(timeout: 5))
         borrowButton.tap()
+    }
 
-        // 確認ダイアログ (ActionSheet) で「貸し出す」をタップ
+    func confirmBorrowDialog() {
         let sheet = app.sheets.firstMatch
-        if sheet.waitForExistence(timeout: 5) {
-            sheet.buttons["貸し出す"].tap()
-        }
+        XCTAssertTrue(sheet.waitForExistence(timeout: 5), "確認ダイアログが表示されていません")
+        sheet.buttons["貸し出す"].tap()
     }
 }
