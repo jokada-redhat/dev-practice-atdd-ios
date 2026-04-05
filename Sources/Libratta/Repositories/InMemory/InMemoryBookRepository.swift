@@ -22,7 +22,7 @@ public final class InMemoryBookRepository: BookRepository, @unchecked Sendable {
     }
 
     public func findAll() -> [Book] {
-        Array(books.values)
+        Array(books.values).sorted { $0.id < $1.id }
     }
 
     public func search(_ query: String) -> [Book] {

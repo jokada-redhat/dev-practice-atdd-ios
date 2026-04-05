@@ -37,21 +37,26 @@ struct BookCatalogPage {
     }
 
     func tapBorrowButton(forBook title: String) {
-        // 書籍を探す（スクロール）
-        let bookText = app.staticTexts[title]
-        if !bookText.waitForExistence(timeout: 5) {
-            app.swipeUp()
-            XCTAssertTrue(bookText.waitForExistence(timeout: 5))
-        }
+        // カタログの読み込みを待つ
+        verifyDisplayed()
 
-        // 「貸し出す」ボタンをタップ
+        // 書籍を探す（まず十分に待ち、見つからなければスクロール）
+        let bookText = app.staticTexts[title]
+        if !bookText.waitForExistence(timeout: 10) {
+            for _ in 0..<5 {
+                app.swipeUp()
+                if bookText.waitForExistence(timeout: 2) { break }
+            }
+        }
+        XCTAssertTrue(bookText.isHittable || bookText.waitForExistence(timeout: 3),
+                      "書籍 '\(title)' が見つかりません")
+
+        // 書籍カードの「貸し出す」ボタンをタップ
         let borrowButton = app.buttons.matching(
             NSPredicate(format: "label CONTAINS '貸し出す'")
         ).firstMatch
-        if !borrowButton.waitForExistence(timeout: 5) {
-            app.swipeUp()
-        }
-        XCTAssertTrue(borrowButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(borrowButton.waitForExistence(timeout: 5),
+                      "貸し出すボタンが見つかりません")
         borrowButton.tap()
     }
 
