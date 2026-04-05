@@ -24,9 +24,9 @@ final class AppDependencies: ObservableObject {
 
         authRepository = StubAuthRepository()
         authRepository.registerUser(
-            email: "test@example.com",
-            password: "pass123",
-            displayName: "山田太郎"
+            email: "librarian@example.com",
+            password: "password",
+            displayName: "司書 太郎"
         )
 
         let generator = DummyDataGenerator(

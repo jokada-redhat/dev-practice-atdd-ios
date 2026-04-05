@@ -12,12 +12,18 @@ struct LoginPage {
 
         let currentEmail = emailField.value as? String ?? ""
         if currentEmail == email {
-            // prefill が一致 → そのままログイン
+            // メールアドレスはプリフィルと一致
+            // パスワードも変更不要なら、そのままログイン
+            let currentPwdLen = (passwordField.value as? String)?.count ?? 0
+            if currentPwdLen != password.count {
+                // パスワード長が異なる → 誤パスワードテスト等
+                selectAllAndType(field: passwordField, text: password)
+            }
             loginButton.tap()
         } else {
-            // 値が違う場合はクリアして入力
-            clearAndType(field: emailField, text: email)
-            clearAndType(field: passwordField, text: password)
+            // メールアドレスが異なる → 両方入力
+            selectAllAndType(field: emailField, text: email)
+            selectAllAndType(field: passwordField, text: password)
             loginButton.tap()
         }
 
@@ -37,9 +43,10 @@ struct LoginPage {
         )
     }
 
-    private func clearAndType(field: XCUIElement, text: String) {
+    private func selectAllAndType(field: XCUIElement, text: String) {
         field.tap()
         field.tap(withNumberOfTaps: 3, numberOfTouches: 1)
+        Thread.sleep(forTimeInterval: 0.3)
         field.typeText(text)
     }
 }

@@ -45,14 +45,14 @@ struct DebugSettingsView: View {
                 HStack {
                     Text("メール")
                     Spacer()
-                    Text("test@example.com")
+                    Text("librarian@example.com")
                         .foregroundStyle(.secondary)
                         .font(.caption)
                 }
                 HStack {
                     Text("パスワード")
                     Spacer()
-                    Text("pass123")
+                    Text("password")
                         .foregroundStyle(.secondary)
                         .font(.caption)
                 }

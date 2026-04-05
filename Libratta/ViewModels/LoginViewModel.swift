@@ -24,8 +24,8 @@ final class LoginViewModel: ObservableObject {
         self.isDebugMode = isDebugMode
 
         if isDebugMode {
-            self.email = "test@example.com"
-            self.password = "pass123"
+            self.email = "librarian@example.com"
+            self.password = "password"
         }
     }
 
