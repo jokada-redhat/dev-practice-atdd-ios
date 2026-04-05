@@ -164,24 +164,30 @@ public final class DummyDataGenerator: Sendable {
     }
     // swiftlint:enable function_body_length
 
+    private struct LoanSeed {
+        let memberId: String
+        let bookId: String
+        let daysAgo: Int
+    }
+
     private func generateLoans() {
         let now = Date()
         let calendar = Calendar.current
-        let borrowings: [(memberId: String, bookId: String, daysAgo: Int)] = [
-            ("DA-0001", "B-003", 5),
-            ("DA-0001", "B-009", 3),
-            ("DA-0002", "B-017", 10),
-            ("DA-0002", "B-021", 7),
-            ("DA-0003", "B-031", 12),
-            ("DA-0004", "B-036", 2),
-            ("DA-0004", "B-041", 1),
-            ("DA-0005", "B-045", 8),
-            ("DA-0006", "B-012", 4),
-            ("DA-0006", "B-025", 6)
+        let borrowings: [LoanSeed] = [
+            LoanSeed(memberId: "DA-0001", bookId: "B-003", daysAgo: 5),
+            LoanSeed(memberId: "DA-0001", bookId: "B-009", daysAgo: 3),
+            LoanSeed(memberId: "DA-0002", bookId: "B-017", daysAgo: 10),
+            LoanSeed(memberId: "DA-0002", bookId: "B-021", daysAgo: 7),
+            LoanSeed(memberId: "DA-0003", bookId: "B-031", daysAgo: 12),
+            LoanSeed(memberId: "DA-0004", bookId: "B-036", daysAgo: 2),
+            LoanSeed(memberId: "DA-0004", bookId: "B-041", daysAgo: 1),
+            LoanSeed(memberId: "DA-0005", bookId: "B-045", daysAgo: 8),
+            LoanSeed(memberId: "DA-0006", bookId: "B-012", daysAgo: 4),
+            LoanSeed(memberId: "DA-0006", bookId: "B-025", daysAgo: 6)
         ]
-        for borrow in borrowings {
-            let borrowedDate = calendar.date(byAdding: .day, value: -borrow.daysAgo, to: now) ?? now
-            let loan = Loan(memberId: borrow.memberId, bookId: borrow.bookId, borrowedDate: borrowedDate)
+        for seed in borrowings {
+            let borrowedDate = calendar.date(byAdding: .day, value: -seed.daysAgo, to: now) ?? now
+            let loan = Loan(memberId: seed.memberId, bookId: seed.bookId, borrowedDate: borrowedDate)
             try? loanRepository.save(loan)
         }
     }
