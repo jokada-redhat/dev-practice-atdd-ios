@@ -141,7 +141,7 @@ extension Cucumber: StepImplementation {
         }
 
         Then("貸し出しエラーメッセージが表示される") { _, _ in
-            let alert = app.alerts["エラー"]
+            let alert = app.alerts.firstMatch
             XCTAssertTrue(
                 alert.waitForExistence(timeout: 10),
                 "貸し出しエラーアラートが表示されていません"

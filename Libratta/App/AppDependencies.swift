@@ -48,8 +48,9 @@ final class AppDependencies: ObservableObject {
             bookRepository: bookRepository,
             loanRepository: loanRepository
         )
+        // B-001（吾輩は猫である）はUIテストで貸出対象にするため除外
         let availableBooks = bookRepository.findAll().filter { book in
-            loanRepository.findActiveByBookId(book.id) == nil
+            book.id != "B-001" && loanRepository.findActiveByBookId(book.id) == nil
         }
         let currentCount = loanRepository.countActiveByMemberId(memberId)
         let needed = 3 - currentCount
