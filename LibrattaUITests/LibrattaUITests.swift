@@ -1,5 +1,6 @@
 import XCTest
 import CucumberSwift
+import CucumberSwiftExpressions
 
 extension Cucumber: StepImplementation {
     public var bundle: Bundle {
@@ -20,14 +21,13 @@ extension Cucumber: StepImplementation {
         Given("未ログイン状態になっている") { _, _ in
         }
 
-        When("メールアドレス {string} とパスワード {string} でログインする") { matches, _ in
-            let email = matches[1]
-            let password = matches[2]
-            LoginPage(app: app).login(email: email, password: password)
+        When("以下の認証情報でログインする") { _, step in
+            let row = step.dataTable!.rows[1]
+            LoginPage(app: app).login(email: row[0], password: row[1])
         }
 
-        Then("表示名 {string} がトップページに表示されている") { matches, _ in
-            let name = matches[1]
+        Then("表示名 {string} がトップページに表示されている" as CucumberExpression) { matches, _ in
+            let name = try matches.first(\.string)
             TopPage(app: app).verifyDisplayName(name)
         }
 
@@ -35,8 +35,8 @@ extension Cucumber: StepImplementation {
             TopPage(app: app).verifyLogoutButtonExists()
         }
 
-        Then("エラーメッセージ {string} が表示されている") { matches, _ in
-            let message = matches[1]
+        Then("エラーメッセージ {string} が表示されている" as CucumberExpression) { matches, _ in
+            let message = try matches.first(\.string)
             LoginPage(app: app).verifyError(message)
         }
 
@@ -60,8 +60,8 @@ extension Cucumber: StepImplementation {
             MemberListPage(app: app).verifyDisplayed()
         }
 
-        Then("会員 {string} のカードが表示されている") { matches, _ in
-            let name = matches[1]
+        Then("会員 {string} のカードが表示されている" as CucumberExpression) { matches, _ in
+            let name = try matches.first(\.string)
             MemberListPage(app: app).verifyMemberExists(name)
         }
 
@@ -74,8 +74,8 @@ extension Cucumber: StepImplementation {
             MemberListPage(app: app).verifyDisplayed()
         }
 
-        When("^会員 \"(.+)\" のカードをタップする$") { matches, _ in
-            let name = matches[1]
+        When("会員 {string} のカードをタップする" as CucumberExpression) { matches, _ in
+            let name = try matches.first(\.string)
             MemberListPage(app: app).tapMember(name)
         }
 
@@ -85,13 +85,13 @@ extension Cucumber: StepImplementation {
             BookCatalogPage(app: app).verifyDisplayed()
         }
 
-        Then("選択中メンバー {string} が表示されている") { matches, _ in
-            let name = matches[1]
+        Then("選択中メンバー {string} が表示されている" as CucumberExpression) { matches, _ in
+            let name = try matches.first(\.string)
             BookCatalogPage(app: app).verifySelectedMember(name)
         }
 
-        Given("書籍カタログ画面が会員 {string} で表示されている") { matches, _ in
-            let memberName = matches[1]
+        Given("書籍カタログ画面が会員 {string} で表示されている" as CucumberExpression) { matches, _ in
+            let memberName = try matches.first(\.string)
             LoginPage(app: app).login(
                 email: "librarian@example.com",
                 password: "password"
@@ -101,25 +101,25 @@ extension Cucumber: StepImplementation {
             BookCatalogPage(app: app).verifyDisplayed()
         }
 
-        Then("書籍 {string} のカードが表示されている") { matches, _ in
-            let title = matches[1]
+        Then("書籍 {string} のカードが表示されている" as CucumberExpression) { matches, _ in
+            let title = try matches.first(\.string)
             BookCatalogPage(app: app).verifyBookExists(title)
         }
 
-        Then("書籍 {string} のカードが表示されていない") { matches, _ in
-            let title = matches[1]
+        Then("書籍 {string} のカードが表示されていない" as CucumberExpression) { matches, _ in
+            let title = try matches.first(\.string)
             BookCatalogPage(app: app).verifyBookNotExists(title)
         }
 
-        When("{string} フィルタボタンをタップする") { matches, _ in
-            let filter = matches[1]
+        When("{string} フィルタボタンをタップする" as CucumberExpression) { matches, _ in
+            let filter = try matches.first(\.string)
             BookCatalogPage(app: app).tapFilter(filter)
         }
 
         // MARK: - Borrowing Flow Steps
 
-        When("^書籍 \"(.+)\" の貸し出しボタンをタップする$") { matches, _ in
-            let title = matches[1]
+        When("書籍 {string} の貸し出しボタンをタップする" as CucumberExpression) { matches, _ in
+            let title = try matches.first(\.string)
             BookCatalogPage(app: app).tapBorrowButton(forBook: title)
         }
 
