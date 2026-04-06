@@ -424,8 +424,9 @@ xcodebuild test \
 
 ### Q: CucumberSwift に制約はある？
 
-あります。詳細は [iOS BDD テストにおける @smoke タグの制約と回避策](ios-bdd-tag-constraints.md) を参照してください。主な制約:
+あります。詳細は [ios-bdd-constraints.md](./ios-bdd-constraints.md) を参照してください。主な制約:
 
-- feature ファイル内の `@` 文字がパースエラーを引き起こす
-- `And` キーワードのステップが正しくマッチングされないケースがある
-- ユニットテスト層では CucumberSwift を使わず XCTest で手動対応
+- feature ファイル内の `@` 文字がタグとして誤認される → DataTable で回避
+- `{string}` パラメータには `as CucumberExpression` が必要
+- multi-capture CucumberExpression は `extension Cucumber` メソッド内でのみ使用可能
+- 3パラメータ以上は DataTable に分割が必要
