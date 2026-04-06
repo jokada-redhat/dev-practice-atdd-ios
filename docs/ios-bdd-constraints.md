@@ -139,7 +139,44 @@ swift test
 
 ---
 
-## 制約 3: ステップテキスト内の `@` がタグとして誤認される
+## 制約 3: `{string}` パラメータには `as CucumberExpression` が必要
+
+### 問題
+
+CucumberSwift のステップ定義で `{string}` を使うと、デフォルトでは deprecated な正規表現オーバーロードが選択されます。`{string}` は NSRegularExpression で無効なパターンのため、**ステップが feature ファイルとマッチせず、テストが実行されない（偽陽性）** 状態になります。
+
+```swift
+// ✗ {string} が無効な正規表現として扱われ、ステップが一切マッチしない
+Then("書籍 {string} のカードが表示されている") { matches, _ in
+    let title = matches[1]  // 実行されない
+}
+```
+
+### 回避策: `as CucumberExpression` を付与する
+
+パターン文字列に `as CucumberExpression` を付けると、Cucumber Expression として正しく解析されます。コールバックの型が `[String]` から `CucumberSwiftExpressions.Match` に変わるため、値の取得方法も変わります。
+
+```swift
+import CucumberSwiftExpressions
+
+// ✓ CucumberExpression として正しくマッチ
+Then("書籍 {string} のカードが表示されている" as CucumberExpression) { matches, _ in
+    let title = try matches.first(\.string)
+    BookCatalogPage(app: app).verifyBookExists(title)
+}
+
+// 2つの {string} パラメータがある場合
+When("ユーザー {string} がパスワード {string} でログインする" as CucumberExpression) { matches, _ in
+    let user = try matches.first(\.string)
+    let password = try matches.last(\.string)
+}
+```
+
+パラメータなしのステップには `as CucumberExpression` は不要です。
+
+---
+
+## 制約 4: ステップテキスト内の `@` がタグとして誤認される
 
 ### 問題
 
@@ -189,5 +226,6 @@ When("以下の認証情報でログインする") { _, step in
 1. `Features/` に feature ファイルを追加
 2. `LibrattaUITests.swift` にステップ定義を追加（`Given` / `When` / `Then`）
 3. 必要に応じて `PageObjects/` にページオブジェクトを追加
-4. ステップテキストに `@` を含めない — DataTable で渡す（制約 3 参照）
+4. `{string}` パラメータを使うステップは `as CucumberExpression` を付ける（制約 3 参照）
+5. ステップテキストに `@` を含めない — DataTable で渡す（制約 4 参照）
 5. `xcodebuild test -scheme LibrattaUITests` で全シナリオ通過を確認（`testGherkin` 含む）
