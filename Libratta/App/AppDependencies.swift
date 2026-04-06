@@ -36,27 +36,6 @@ final class AppDependencies: ObservableObject {
         )
         generator.generate()
 
-        if ProcessInfo.processInfo.arguments.contains("--set-borrowing-limit-test") {
-            setupBorrowingLimitTest()
-        }
-    }
-
-    private func setupBorrowingLimitTest() {
-        let memberId = "DA-0001"
-        let borrowUseCase = BorrowBookUseCase(
-            memberRepository: memberRepository,
-            bookRepository: bookRepository,
-            loanRepository: loanRepository
-        )
-        // B-001（吾輩は猫である）はUIテストで貸出対象にするため除外
-        let availableBooks = bookRepository.findAll().filter { book in
-            book.id != "B-001" && loanRepository.findActiveByBookId(book.id) == nil
-        }
-        let currentCount = loanRepository.countActiveByMemberId(memberId)
-        let needed = 3 - currentCount
-        for book in availableBooks.prefix(needed) {
-            _ = borrowUseCase.execute(memberId: memberId, bookTitle: book.title)
-        }
     }
 
     // MARK: - UseCases

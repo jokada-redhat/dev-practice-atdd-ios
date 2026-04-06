@@ -7,6 +7,7 @@ extension Cucumber: StepImplementation {
         return Bundle(for: Findme.self)
     }
 
+    // swiftlint:disable:next function_body_length
     public func setupSteps() {
         let app = XCUIApplication()
 
@@ -46,10 +47,14 @@ extension Cucumber: StepImplementation {
         // MARK: - Navigation Steps
 
         Given("トップ画面が表示されている") { _, _ in
-            LoginPage(app: app).login(
-                email: "librarian@example.com",
-                password: "password"
-            )
+            // 既にトップ画面にいる場合はスキップ
+            let navBar = app.navigationBars["Libratta"]
+            if !navBar.waitForExistence(timeout: 2) {
+                LoginPage(app: app).login(
+                    email: "librarian@example.com",
+                    password: "password"
+                )
+            }
             TopPage(app: app).verifyDisplayed()
         }
 
@@ -121,10 +126,24 @@ extension Cucumber: StepImplementation {
 
         // MARK: - Borrowing Flow Steps
 
-        Given("^会員 \"(.+)\" の貸出冊数を上限に設定する$") { _, _ in
-            app.terminate()
-            app.launchArguments.append("--set-borrowing-limit-test")
-            app.launch()
+        Given("^会員 \"(.+)\" の貸出冊数を上限に設定する$") { matches, _ in
+            let memberName = matches[1]
+            // DA-0001 は既に2冊借りている（上限3冊）ので、UI で1冊借りて上限到達
+            LoginPage(app: app).login(
+                email: "librarian@example.com",
+                password: "password"
+            )
+            TopPage(app: app).tapBorrowingCard()
+            MemberListPage(app: app).tapMember(memberName)
+            BookCatalogPage(app: app).tapBorrowButton(forBook: "坊っちゃん")
+            BookCatalogPage(app: app).confirmBorrowDialog()
+            LoanConfirmationPage(app: app).verifyDisplayed()
+            // ホームに戻る
+            let homeButton = app.buttons["ホームに戻る"]
+            XCTAssertTrue(homeButton.waitForExistence(timeout: 10))
+            homeButton.tap()
+            // トップ画面に戻ったことを確認（次の And トップ画面 ではログイン済みをスキップ）
+            TopPage(app: app).verifyDisplayed()
         }
 
         When("^書籍 \"(.+)\" の貸し出しボタンをタップする$") { matches, _ in
