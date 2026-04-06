@@ -8,6 +8,7 @@ extension Cucumber: StepImplementation {
         return Bundle(for: Findme.self)
     }
 
+    // swiftlint:disable:next function_body_length
     public func setupSteps() {
         let app = XCUIApplication()
 
@@ -43,10 +44,14 @@ extension Cucumber: StepImplementation {
         // MARK: - Navigation Steps
 
         Given("トップ画面が表示されている") { _, _ in
-            LoginPage(app: app).login(
-                email: "librarian@example.com",
-                password: "password"
-            )
+            // 既にトップ画面にいる場合はスキップ
+            let navBar = app.navigationBars["Libratta"]
+            if !navBar.waitForExistence(timeout: 2) {
+                LoginPage(app: app).login(
+                    email: "librarian@example.com",
+                    password: "password"
+                )
+            }
             TopPage(app: app).verifyDisplayed()
         }
 
