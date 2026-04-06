@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00A7654E5669239593B12363 /* BookManagementSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23651B41D627430246C63D7 /* BookManagementSteps.swift */; };
 		05D5F1100844986ABF0A1650 /* SearchBooksUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6214A1588756D9EA18093290 /* SearchBooksUseCase.swift */; };
 		080D742C7DF211E7CA9D637E /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F508846727753DFFEADD618B /* BookListViewModel.swift */; };
+		0B6ED8D754CE87447050A275 /* ReturnBookSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06E914ACEA504A0E73BC941 /* ReturnBookSteps.swift */; };
 		1588A16B06D20C0B3209A27E /* AddMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC60D9D9FB9B0F39958DB2 /* AddMemberViewModel.swift */; };
 		186D0C2F270A8501826E18A2 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBB83E81FCA72A37334F165 /* LoginRequest.swift */; };
 		2142EAB5DE6C30DFBE8526EE /* ListMembersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2B64BF5DA9AA5E9FA19E51 /* ListMembersUseCase.swift */; };
@@ -19,17 +21,24 @@
 		2DDA532D16D20AEB5B189D2F /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE84A80E132F6D76C493A73 /* AddBookView.swift */; };
 		2EF9624D4660B247BFD70719 /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5E0DB142419FA504CEC94 /* Loan.swift */; };
 		30B3EBE18FA58AFA3F51E88E /* RegisterBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618524EF077715AB0E3B52C4 /* RegisterBookUseCase.swift */; };
+		3750DD49988E690CF8FE12FD /* ReturnFromListSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C26407B9B9578A858F976 /* ReturnFromListSteps.swift */; };
 		38F04731FE20459A49594C05 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73D17D69D43D36B309B6504 /* Book.swift */; };
 		3A43C34095A595CA091FAC7D /* LoanConfirmationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AFAF1FE7F00BD7F0133367 /* LoanConfirmationPage.swift */; };
 		3BB5EF41EFB7F0A8FD7194A8 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707C3A3F6EC2564546EDA1B8 /* Member.swift */; };
 		3CF593165181E32088A13781 /* AddBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCF19DD5BA53D1E349A257C /* AddBookViewModel.swift */; };
+		3D61B9ED175CA24538D3FB45 /* LoginSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EFD4B64E33E9267E9C26EB /* LoginSteps.swift */; };
 		3F27FA226EB53BFF46864232 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */; };
 		429FF2540732494AF88A75BB /* LoanConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4980CA8630239555B710DC8 /* LoanConfirmationView.swift */; };
 		44C3973F7EDF0F82A90278D5 /* AuthApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647323DD2E1C773A2A74608 /* AuthApiClient.swift */; };
 		48B035F0D9B711C976DAA286 /* MockURLProtocolSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD68EC4D0ABE4715F40B2D7 /* MockURLProtocolSession.swift */; };
+		499FC9C36748EF5728371D67 /* SessionSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C0914DCC534874CD8AFBBF /* SessionSteps.swift */; };
 		54FB6A44D87A98B798321EEB /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCD11AEB013E5C0B5E5F2B4 /* LoginUseCase.swift */; };
+		5557986B7A0290C95D512760 /* MemberManagementSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D7C70CDEB60E02EF3962B9 /* MemberManagementSteps.swift */; };
+		572E2436D30E587D595E623C /* BookCatalogSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3013423F4EE97A5502C7D37 /* BookCatalogSteps.swift */; };
+		5AA4CCD11A2C07F917E98EF8 /* BorrowingFlowSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114DDCEACF4E96D22D0051B5 /* BorrowingFlowSteps.swift */; };
 		5E28B3DF27987F9B6E3D4625 /* BookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC3473CA2950990E10307A /* BookListView.swift */; };
 		62C791DCB4A3F01C16ACE4B6 /* AddMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746548CC2B1EFD8ADEEF3CFA /* AddMemberView.swift */; };
+		63FF15801D41AE8AA4DD0483 /* LoginApiSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B20DB0CD7F796228470F67 /* LoginApiSteps.swift */; };
 		68C8B9ED968D3326AD35D626 /* CucumberSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 21AEAE366289FC5CF167AA80 /* CucumberSwift */; };
 		7C3785F1BAEB3677D58A5C00 /* MemberListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C66812603029C8E8E31C16F /* MemberListPage.swift */; };
 		815C083985A2B635C0101CDC /* BookRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F415DEE0F444CC140E4CA3A /* BookRepository.swift */; };
@@ -55,6 +64,7 @@
 		CBB517FD98F180BDEF700AE6 /* MemberListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C8F2E7592936D7562F76A7 /* MemberListViewModel.swift */; };
 		D0031185523F12B11DF05E91 /* ScenarioContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B633A557FDCA5F6A5F67BD /* ScenarioContext.swift */; };
 		D24BEF25E58C36F7094657AF /* DummyDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A62872A3D14161B0EC37F4 /* DummyDataGenerator.swift */; };
+		D2B2D3D07BBCB2BBA5F9737E /* SharedSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136B3BD6ED3A52D9051D57FE /* SharedSteps.swift */; };
 		D50304C6E4B8D4730C8E04A7 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13A9E9FC435FECED6699A85 /* AppDependencies.swift */; };
 		DBE7C4A4B182E748D17B0611 /* Features in Resources */ = {isa = PBXBuildFile; fileRef = 8D6A0A8C90BD80B2111D01E9 /* Features */; };
 		DC4B4C98DF192E8E28B2C514 /* ReturnBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A2BA789883D5A19E9A2E0E /* ReturnBookViewModel.swift */; };
@@ -88,9 +98,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03B20DB0CD7F796228470F67 /* LoginApiSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApiSteps.swift; sourceTree = "<group>"; };
 		0491352D5320F7FF53794AE2 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		0F415DEE0F444CC140E4CA3A /* BookRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRepository.swift; sourceTree = "<group>"; };
+		114DDCEACF4E96D22D0051B5 /* BorrowingFlowSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowingFlowSteps.swift; sourceTree = "<group>"; };
 		130DED50570ED7C1B91AD50A /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		136B3BD6ED3A52D9051D57FE /* SharedSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSteps.swift; sourceTree = "<group>"; };
 		16B633A557FDCA5F6A5F67BD /* ScenarioContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioContext.swift; sourceTree = "<group>"; };
 		1C7EBFF821D744F906184991 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1FD3C7B5634A25EBDB21FBF4 /* MemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRepository.swift; sourceTree = "<group>"; };
@@ -114,6 +127,7 @@
 		7EEB881AC7D554CC99D9D4F4 /* InMemoryLoanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryLoanRepository.swift; sourceTree = "<group>"; };
 		7FBB83E81FCA72A37334F165 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		80AFAF1FE7F00BD7F0133367 /* LoanConfirmationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanConfirmationPage.swift; sourceTree = "<group>"; };
+		82C0914DCC534874CD8AFBBF /* SessionSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSteps.swift; sourceTree = "<group>"; };
 		845E340E93B5DF60B417B6F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		87437426360D90877C6D67BA /* LibrattaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrattaApp.swift; sourceTree = "<group>"; };
 		8C66812603029C8E8E31C16F /* MemberListPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListPage.swift; sourceTree = "<group>"; };
@@ -128,23 +142,29 @@
 		A7FA804F11F81D6C7275C382 /* LoanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRepository.swift; sourceTree = "<group>"; };
 		AE22D7CD438ECA81FFE3F21A /* InMemoryMemberRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryMemberRepository.swift; sourceTree = "<group>"; };
 		B1AEEAF912727C054DEF878D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B23651B41D627430246C63D7 /* BookManagementSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookManagementSteps.swift; sourceTree = "<group>"; };
 		B2B172FA0D6A41A750DAFDD6 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		B2CA88C571E8C902A658B23B /* TopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewModel.swift; sourceTree = "<group>"; };
+		B3013423F4EE97A5502C7D37 /* BookCatalogSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogSteps.swift; sourceTree = "<group>"; };
 		B647323DD2E1C773A2A74608 /* AuthApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApiClient.swift; sourceTree = "<group>"; };
 		B73D17D69D43D36B309B6504 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		BC6C26407B9B9578A858F976 /* ReturnFromListSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnFromListSteps.swift; sourceTree = "<group>"; };
 		BEB19546042AE3A216203514 /* BookCatalogPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCatalogPage.swift; sourceTree = "<group>"; };
 		BFCD11AEB013E5C0B5E5F2B4 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		C49A0BACA2A2075DBB698C6D /* MemberListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListView.swift; sourceTree = "<group>"; };
 		C8A71A9F45D8D6698FFB438E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CC4349A96423AB523D060A1E /* LibrattaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrattaUITests.swift; sourceTree = "<group>"; };
+		D1D7C70CDEB60E02EF3962B9 /* MemberManagementSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberManagementSteps.swift; sourceTree = "<group>"; };
 		D84F5B0B4FB815ABF989AC83 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		D9B6D81E05BA4B5164A7118A /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		DAC0D4F3D45FEF6565F1EFD9 /* ReturnBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookUseCase.swift; sourceTree = "<group>"; };
 		DDD11DBF097A48F4DCCBD02B /* InMemorySessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySessionRepository.swift; sourceTree = "<group>"; };
 		E13A9E9FC435FECED6699A85 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		E3C8F2E7592936D7562F76A7 /* MemberListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListViewModel.swift; sourceTree = "<group>"; };
+		E3EFD4B64E33E9267E9C26EB /* LoginSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSteps.swift; sourceTree = "<group>"; };
 		EAE84A80E132F6D76C493A73 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		ECCF19DD5BA53D1E349A257C /* AddBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewModel.swift; sourceTree = "<group>"; };
+		F06E914ACEA504A0E73BC941 /* ReturnBookSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnBookSteps.swift; sourceTree = "<group>"; };
 		F1F78E3A072FFE6747C32935 /* LibrattaTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = LibrattaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2A8FC236F1E46AF3A474F30 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
 		F508846727753DFFEADD618B /* BookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewModel.swift; sourceTree = "<group>"; };
@@ -175,6 +195,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		105E7F6D7A8DE4F99220DEA0 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				B3013423F4EE97A5502C7D37 /* BookCatalogSteps.swift */,
+				B23651B41D627430246C63D7 /* BookManagementSteps.swift */,
+				114DDCEACF4E96D22D0051B5 /* BorrowingFlowSteps.swift */,
+				03B20DB0CD7F796228470F67 /* LoginApiSteps.swift */,
+				E3EFD4B64E33E9267E9C26EB /* LoginSteps.swift */,
+				D1D7C70CDEB60E02EF3962B9 /* MemberManagementSteps.swift */,
+				F06E914ACEA504A0E73BC941 /* ReturnBookSteps.swift */,
+				BC6C26407B9B9578A858F976 /* ReturnFromListSteps.swift */,
+				82C0914DCC534874CD8AFBBF /* SessionSteps.swift */,
+				136B3BD6ED3A52D9051D57FE /* SharedSteps.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
 		14EE803BBF7D2C5A451B048A /* PageObjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +309,7 @@
 			children = (
 				6B199A200B3B9F15F6CE49A3 /* LibrattaTestRunner.swift */,
 				16B633A557FDCA5F6A5F67BD /* ScenarioContext.swift */,
+				105E7F6D7A8DE4F99220DEA0 /* Steps */,
 			);
 			path = CucumberRunner;
 			sourceTree = "<group>";
@@ -515,9 +553,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				572E2436D30E587D595E623C /* BookCatalogSteps.swift in Sources */,
+				00A7654E5669239593B12363 /* BookManagementSteps.swift in Sources */,
+				5AA4CCD11A2C07F917E98EF8 /* BorrowingFlowSteps.swift in Sources */,
 				EA1F4BC7B0137EF240EE661A /* LibrattaTestRunner.swift in Sources */,
+				63FF15801D41AE8AA4DD0483 /* LoginApiSteps.swift in Sources */,
+				3D61B9ED175CA24538D3FB45 /* LoginSteps.swift in Sources */,
+				5557986B7A0290C95D512760 /* MemberManagementSteps.swift in Sources */,
 				48B035F0D9B711C976DAA286 /* MockURLProtocolSession.swift in Sources */,
+				0B6ED8D754CE87447050A275 /* ReturnBookSteps.swift in Sources */,
+				3750DD49988E690CF8FE12FD /* ReturnFromListSteps.swift in Sources */,
 				D0031185523F12B11DF05E91 /* ScenarioContext.swift in Sources */,
+				499FC9C36748EF5728371D67 /* SessionSteps.swift in Sources */,
+				D2B2D3D07BBCB2BBA5F9737E /* SharedSteps.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
