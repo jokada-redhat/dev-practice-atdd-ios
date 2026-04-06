@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import XCTest
 import CucumberSwift
 import CucumberSwiftExpressions
@@ -135,7 +136,7 @@ extension Cucumber: StepImplementation {
         Given("以下の会員が登録されている:") { _, step in
             guard let rows = step.dataTable?.rows else { return }
             for row in rows.dropFirst() {
-                try! context.memberRepo.save(Member(id: row[0], name: row[1]))
+                try! context.memberRepo.save(Member(id: row[0], name: row[1])) // swiftlint:disable:this force_try
             }
         }
 
@@ -209,6 +210,7 @@ extension Cucumber: StepImplementation {
         Given("書籍管理に以下の書籍が登録されている:") { _, step in
             guard let rows = step.dataTable?.rows else { return }
             for row in rows.dropFirst() {
+                // swiftlint:disable:next force_try
                 try! context.bookRepo.save(
                     Book(title: row[0], author: row[1], isbn: row[2], publicationYear: Int(row[3]) ?? 2020)
                 )
@@ -297,6 +299,7 @@ extension Cucumber: StepImplementation {
         Given("以下の書籍が登録されている:") { _, step in
             guard let rows = step.dataTable?.rows else { return }
             for row in rows.dropFirst() {
+                // swiftlint:disable:next force_try
                 try! context.bookRepo.save(
                     Book(title: row[0], author: row[1], isbn: row[2], publicationYear: Int(row[3]) ?? 2020)
                 )
@@ -366,8 +369,8 @@ extension Cucumber: StepImplementation {
             let memberId = try matches.first(\.string)
             let bookCount = try matches.last(\.int)
             context.ensureBorrowUseCase()
-            for i in 0..<bookCount {
-                let title = "Book \(i + 1)"
+            for index in 0..<bookCount {
+                let title = "Book \(index + 1)"
                 try context.bookRepo.save(
                     Book(title: title, author: "Author", isbn: UUID().uuidString, publicationYear: 2020)
                 )
@@ -472,6 +475,7 @@ extension Cucumber: StepImplementation {
                 let memberId = row[0]
                 let bookTitle = row[1]
                 let isbn = row[2]
+                // swiftlint:disable:next force_try
                 try! context.bookRepo.save(
                     Book(title: bookTitle, author: "Author", isbn: isbn, publicationYear: 2020)
                 )
@@ -637,6 +641,7 @@ extension Cucumber: StepImplementation {
                     || (password?.isEmpty ?? true) || !(email?.contains("@") ?? false) {
                     mockStatusCode = 400
                     mockResponseBody = ["error": "Bad Request"]
+                    // swiftlint:disable:next force_try
                     let data = try! JSONSerialization.data(withJSONObject: mockResponseBody)
                     let response = HTTPURLResponse(
                         url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil
@@ -647,6 +652,7 @@ extension Cucumber: StepImplementation {
                 if email == "test@example.com" && password == "password123" {
                     mockStatusCode = 200
                     mockResponseBody = ["token": "test-token-abc", "displayName": "テストユーザー"]
+                    // swiftlint:disable:next force_try
                     let data = try! JSONSerialization.data(withJSONObject: mockResponseBody)
                     let response = HTTPURLResponse(
                         url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil
@@ -656,6 +662,7 @@ extension Cucumber: StepImplementation {
 
                 mockStatusCode = 401
                 mockResponseBody = ["error": "Unauthorized"]
+                // swiftlint:disable:next force_try
                 let data = try! JSONSerialization.data(withJSONObject: mockResponseBody)
                 let response = HTTPURLResponse(
                     url: request.url!, statusCode: 401, httpVersion: nil, headerFields: nil
