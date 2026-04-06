@@ -139,31 +139,20 @@ swift test
 
 ---
 
-## 制約 3: CucumberSwift の `And` ステップにはキーワード別の登録が必要
+## 制約 3: CucumberSwift の `And` ステップは自動解決されるが仕組みを理解しておく
 
-### 問題
+### 仕組み
 
-CucumberSwift は Gherkin の `And` キーワードを直前の `Given` / `When` / `Then` に解決しません。`And` は独立したキーワードとして扱われます（[cucumberswift/CucumberSwift#32](https://github.com/cucumberswift/CucumberSwift/issues/32)）。
+CucumberSwift の `Scenario.setupSteps()` は、`And` / `But` ステップに直前の primary keyword（`Given` / `When` / `Then`）を自動的に追加します。そのため `Then(...)` だけ登録すれば、後続の `And` 行も正しくマッチします。
 
 ```gherkin
 Then 書籍 "吾輩は猫である" のカードが表示されている
-And 書籍 "坊っちゃん" のカードが表示されている     ← Then として扱われない
+And 書籍 "坊っちゃん" のカードが表示されている     ← 自動的に Then としてもマッチ
 ```
 
-`Then(...)` だけ登録した場合、`And` 行はマッチせず `testGherkin` が FAILED になります。
+`And(...)` の重複登録は不要です。
 
-### 回避策: `And(...)` で明示的に登録する
-
-共通のクロージャを変数に抽出し、`Then(...)` と `And(...)` の両方に登録します。
-
-```swift
-let verifyBookExists: (CucumberSwiftExpressions.Match, Step) throws -> Void = { matches, _ in
-    let title = try matches.first(\.string)
-    BookCatalogPage(app: app).verifyBookExists(title)
-}
-Then("書籍 {string} のカードが表示されている" as CucumberExpression, callback: verifyBookExists)
-And("書籍 {string} のカードが表示されている" as CucumberExpression, callback: verifyBookExists)
-```
+- **参照**: [cucumberswift/CucumberSwift#32](https://github.com/cucumberswift/CucumberSwift/issues/32)
 
 ---
 
@@ -217,6 +206,5 @@ When("以下の認証情報でログインする") { _, step in
 1. `Features/` に feature ファイルを追加
 2. `LibrattaUITests.swift` にステップ定義を追加（`Given` / `When` / `Then`）
 3. 必要に応じて `PageObjects/` にページオブジェクトを追加
-4. `And` で使うステップは `And(...)` でも登録する（制約 3 参照）
-5. ステップテキストに `@` を含めない — DataTable で渡す（制約 4 参照）
-6. `xcodebuild test -scheme LibrattaUITests` で全シナリオ通過を確認（`testGherkin` 含む）
+4. ステップテキストに `@` を含めない — DataTable で渡す（制約 4 参照）
+5. `xcodebuild test -scheme LibrattaUITests` で全シナリオ通過を確認（`testGherkin` 含む）
