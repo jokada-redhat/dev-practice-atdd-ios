@@ -139,24 +139,7 @@ swift test
 
 ---
 
-## 制約 3: CucumberSwift の `And` ステップは自動解決されるが仕組みを理解しておく
-
-### 仕組み
-
-CucumberSwift の `Scenario.setupSteps()` は、`And` / `But` ステップに直前の primary keyword（`Given` / `When` / `Then`）を自動的に追加します。そのため `Then(...)` だけ登録すれば、後続の `And` 行も正しくマッチします。
-
-```gherkin
-Then 書籍 "吾輩は猫である" のカードが表示されている
-And 書籍 "坊っちゃん" のカードが表示されている     ← 自動的に Then としてもマッチ
-```
-
-`And(...)` の重複登録は不要です。
-
-- **参照**: [cucumberswift/CucumberSwift#32](https://github.com/cucumberswift/CucumberSwift/issues/32)
-
----
-
-## 制約 4: ステップテキスト内の `@` がタグとして誤認される
+## 制約 3: ステップテキスト内の `@` がタグとして誤認される
 
 ### 問題
 
@@ -206,5 +189,5 @@ When("以下の認証情報でログインする") { _, step in
 1. `Features/` に feature ファイルを追加
 2. `LibrattaUITests.swift` にステップ定義を追加（`Given` / `When` / `Then`）
 3. 必要に応じて `PageObjects/` にページオブジェクトを追加
-4. ステップテキストに `@` を含めない — DataTable で渡す（制約 4 参照）
+4. ステップテキストに `@` を含めない — DataTable で渡す（制約 3 参照）
 5. `xcodebuild test -scheme LibrattaUITests` で全シナリオ通過を確認（`testGherkin` 含む）
