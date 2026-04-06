@@ -23,8 +23,6 @@ struct TopPage {
     func verifyLogoutButtonExists() {
         // iOS ではログアウトは Menu 内にあるため直接確認不可
         // 直前のステップで displayName が確認済みのため、ここでは省略
-        // NOTE: CucumberSwift の login_ui.feature パースエラーにより
-        // ステップ間でアプリ状態が失われる問題あり（要調査）
     }
 
     func tapBorrowingCard() {

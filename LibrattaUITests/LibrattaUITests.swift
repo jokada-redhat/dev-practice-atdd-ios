@@ -31,9 +31,6 @@ extension Cucumber: StepImplementation {
             TopPage(app: app).verifyDisplayName(name)
         }
 
-        // NOTE: And ステップは CucumberSwift の制約 (issue #32) により
-        // Then/When で定義すれば実行時に And からも解決される。
-        // testGherkin バリデータのみ未解決エラーを報告するが、実行には影響なし。
         Then("ログアウトボタンが表示されている") { _, _ in
             TopPage(app: app).verifyLogoutButtonExists()
         }
