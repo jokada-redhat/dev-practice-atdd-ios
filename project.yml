@@ -32,10 +32,12 @@ targets:
       - path: LibrattaTests
         excludes:
           - "Features/**"
-    resources:
       - path: LibrattaTests/Features
+        type: folder
+        buildPhase: resources
     dependencies:
       - target: Libratta
+      - package: CucumberSwift
     settings:
       base:
         INFOPLIST_FILE: LibrattaTests/Info.plist
