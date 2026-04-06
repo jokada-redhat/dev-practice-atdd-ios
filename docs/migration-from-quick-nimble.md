@@ -49,25 +49,22 @@ Scenario: 会員が書籍を借りる
 ```
 
 ```swift
-// BorrowingFlowStepTests.swift — 実装（Swift）
-func testSmoke_会員が書籍を借りる() throws {
-    try setupMember("山田太郎", id: "DA-8821")
-    try setupBook("吾輩は猫である")
-
-    let result = borrowUseCase.execute(memberId: "DA-8821", bookTitle: "吾輩は猫である")
-
-    guard case .success = result else { XCTFail("貸出が成功するべき"); return }
-    let book = bookRepo.findByTitle("吾輩は猫である")!
-    XCTAssertNotNil(loanRepo.findActiveByBookId(book.id))
+// BorrowingFlowSteps.swift — 実装（Swift / CucumberSwift）
+extension Cucumber {
+    func registerBorrowingFlowSteps(context: ScenarioContext) {
+        When("会員 {string} が書籍 {string} を借りる" as CucumberExpression) { matches, _ in
+            let memberId = try matches.first(\.string)
+            let bookTitle = try matches.last(\.string)
+            context.ensureBorrowUseCase()
+            context.borrowResult = context.borrowUseCase.execute(
+                memberId: memberId, bookTitle: bookTitle
+            )
+        }
+    }
 }
 ```
 
-> **重要**: feature ファイルの各 Given/When/Then 行とテストコードの対応は、テスト層によって異なります。
->
-> - **ユニットテスト層**: feature ファイルの各ステップは個別に実装されません。テストメソッド全体で1つのシナリオを実装します。
-> - **UIテスト層**: feature ファイルの各ステップが個別のステップ定義クロージャに対応し、CucumberSwift が自動実行します。
->
-> 詳しくは後述の各層のセクションを参照してください。
+> **補足**: 両層とも CucumberSwift が feature ファイルの各ステップを自動マッチングして実行します。ステップ定義は `extension Cucumber` のインスタンスメソッドとして feature ごとにファイル分割しています。
 
 ### なぜ分離するのか
 
@@ -98,76 +95,74 @@ func testSmoke_会員が書籍を借りる() throws {
 
 ### ユニットテスト層 (LibrattaTests)
 
-Quick/Nimble に最も近い形です。feature ファイルは **仕様ドキュメント** として管理し、テスト実装は **XCTestCase のメソッド** で行います。
+**CucumberSwift が feature ファイルを直接実行** します。ステップ定義は `extension Cucumber` のインスタンスメソッドとして feature ごとにファイル分割しています。
 
 ```
 LibrattaTests/
-├── Features/              # Gherkin 仕様（読むもの。自動実行されない）
+├── Features/              # Gherkin 仕様（CucumberSwift が実行）
 │   └── borrowing_flow.feature
-└── Steps/                 # XCTest 実装（動かすもの）
-    └── BorrowingFlowStepTests.swift
+├── CucumberRunner/
+│   ├── LibrattaTestRunner.swift   # setupSteps() — 各 Steps を register
+│   ├── ScenarioContext.swift      # シナリオ間の状態管理
+│   └── Steps/                     # feature ごとのステップ定義
+│       ├── SharedSteps.swift
+│       └── BorrowingFlowSteps.swift
+└── Support/
+    └── MockURLProtocolSession.swift
 ```
 
-feature ファイルの Given/When/Then はテストメソッド内で **一連のロジック** として実装します。ステップごとに分割はしません。
-
 ```swift
-// feature ファイルの1シナリオ = テストメソッド1つ
-func testSmoke_会員が書籍を借りる() throws {
-    try setupMember("山田太郎", id: "DA-8821")     // ← Given に対応
-    try setupBook("The Infinite Library")
-
-    let result = borrowUseCase.execute(             // ← When に対応
-        memberId: "DA-8821",
-        bookTitle: "The Infinite Library"
-    )
-
-    guard case .success = result else {             // ← Then に対応
-        XCTFail("貸出が成功するべき"); return
+// BorrowingFlowSteps.swift
+extension Cucumber {
+    func registerBorrowingFlowSteps(context: ScenarioContext) {
+        When("会員 {string} が書籍 {string} を借りる" as CucumberExpression) { matches, _ in
+            let memberId = try matches.first(\.string)
+            let bookTitle = try matches.last(\.string)
+            context.ensureBorrowUseCase()
+            context.borrowResult = context.borrowUseCase.execute(
+                memberId: memberId, bookTitle: bookTitle
+            )
+        }
     }
-    let book = bookRepo.findByTitle("The Infinite Library")!
-    XCTAssertNotNil(loanRepo.findActiveByBookId(book.id))
-    XCTAssertEqual(loanRepo.countActiveByMemberId("DA-8821"), 1)
 }
 ```
 
 Quick/Nimble との違い:
-- `describe` / `it` ではなく `XCTestCase` のメソッド
+- `describe` / `it` ではなく CucumberSwift の `Given` / `When` / `Then` クロージャ
 - `expect(...).to(...)` ではなく `XCTAssertEqual` / `XCTAssertTrue`
-- feature ファイルは自動実行されない（仕様ドキュメントとして参照）
+- feature ファイルの各ステップが CucumberSwift により自動マッチング・実行される
 
 ### UIテスト層 (LibrattaUITests)
 
-こちらは **CucumberSwift が feature ファイルを直接実行** します。Quick/Nimble にはない仕組みです。
+こちらも **CucumberSwift が feature ファイルを直接実行** します。PageObject パターンで画面操作を抽象化しています。
 
 ```
 LibrattaUITests/
 ├── Features/              # Gherkin 仕様（CucumberSwift が実行）
 │   └── borrowing_flow_ui.feature
-├── LibrattaUITests.swift  # ステップ定義（Given/When/Then クロージャ）
+├── LibrattaUITests.swift  # setupSteps() — 各 Steps を register
+├── Steps/                 # feature ごとのステップ定義
+│   ├── LoginUISteps.swift
+│   └── BookCatalogUISteps.swift
 └── PageObjects/           # 画面操作のヘルパー
     ├── LoginPage.swift
     └── BookCatalogPage.swift
 ```
 
-feature ファイルの各行が **個別のステップ定義クロージャ** に対応します。
-
 ```swift
-// feature ファイルの各ステップに対応するクロージャを登録
-Given("トップ画面が表示されている") { _, _ in
-    LoginPage(app: app).login(email: "librarian@example.com", password: "password")
-    TopPage(app: app).verifyDisplayed()
-}
-
-When("貸し出しカードをタップする") { _, _ in
-    TopPage(app: app).tapBorrowingCard()
-}
-
-Then("会員一覧画面が表示される") { _, _ in
-    MemberListPage(app: app).verifyDisplayed()
+// BookCatalogUISteps.swift
+extension Cucumber {
+    func registerBookCatalogUISteps(app: XCUIApplication) {
+        Given("書籍カタログ画面が会員 {string} で表示されている" as CucumberExpression) { matches, _ in
+            let memberName = try matches.first(\.string)
+            LoginPage(app: app).login(email: "librarian@example.com", password: "password")
+            TopPage(app: app).tapBorrowingCard()
+            MemberListPage(app: app).tapMember(memberName)
+            BookCatalogPage(app: app).verifyDisplayed()
+        }
+    }
 }
 ```
-
-> **`And` ステップについて**: feature ファイルで `And` を使うと、直前の `Given`/`When`/`Then` として解決されます。`And` 専用のステップ定義は不要です。ただし、CucumberSwift の構文チェック (`testGherkin`) では未解決エラーが報告されます（シナリオ実行には影響なし）。詳細は [ios-bdd-constraints.md](./ios-bdd-constraints.md) の「制約 3」を参照。
 
 ---
 
@@ -243,12 +238,11 @@ Scenario: 貸出上限に達している場合は借りられない
 
 - [ ] Gherkin の基本構文（`Feature` / `Scenario` / `Given` / `When` / `Then` / `And`）
 - [ ] feature ファイルが「仕様」、ステップ定義が「実装」であること
-- [ ] ユニットテスト層（XCTest 直接）と UIテスト層（CucumberSwift）の違い
+- [ ] 両層とも CucumberSwift が feature ファイルを自動実行すること
 
 ### 実践の準備
 
-- [ ] ユニットテストの `@smoke` タグ対応は `testSmoke_` プレフィックスで行う
 - [ ] UIテストの PageObject パターン（`PageObjects/` ディレクトリ）を確認した
-- [ ] [ios-bdd-constraints.md](./ios-bdd-constraints.md) の制約（特にアプリ再起動と `And` ステップ）を把握した
+- [ ] [ios-bdd-constraints.md](./ios-bdd-constraints.md) の制約（CucumberExpression、`@` 記号、multi-capture）を把握した
 - [ ] [atdd-guide.md](./atdd-guide.md) の ATDD ワークフローを確認した
-- [ ] 実際のプロジェクトコード（`LibrattaTests/Steps/*.swift` と `LibrattaUITests/LibrattaUITests.swift`）を読んだ
+- [ ] 実際のプロジェクトコード（`LibrattaTests/CucumberRunner/Steps/` と `LibrattaUITests/Steps/`）を読んだ
