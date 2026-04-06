@@ -134,6 +134,50 @@ swift test
 
 ---
 
+## CucumberSwift (UIテスト) の既知の制約
+
+UIテスト層では CucumberSwift を使用して feature ファイルを直接実行していますが、以下の制約があります。
+
+### 1. `And` / `But` ステップが testGherkin で未解決になる
+
+CucumberSwift の `testGherkin` バリデータは、`And` を直前のキーワード (`Then` / `When`) に解決しません。`Then(...)` で定義したステップに `And` 行がマッチせず、"No CucumberSwift expression found" と報告されます。
+
+- **シナリオ実行には影響なし** — 実行時は正しく解決される
+- **参照**: [cucumberswift/CucumberSwift#32](https://github.com/cucumberswift/CucumberSwift/issues/32)（2021年から OPEN）
+- `And(...)` や `MatchAll(...)` で重複登録する回避策は、`Then(...)` のマッチングを壊すため使用不可
+
+### 2. ステップ内でのアプリ再起動は後続ステップを壊す
+
+CucumberSwift は各ステップを個別の XCTest テストケースとして実行します。ステップ内で `app.terminate()` + `app.launch()` すると、XCUIApplication プロキシの内部状態が壊れ、**後続ステップで UI 要素が一切見つからなくなります**。
+
+```swift
+// ✗ これをやると後続ステップが全て失敗する
+Given("テストデータをセットアップ") { _, _ in
+    app.terminate()
+    app.launchArguments.append("--setup-flag")
+    app.launch()
+}
+```
+
+`BeforeScenario` での再起動は問題ありません（プロキシが未使用の初期状態で実行されるため）。
+
+**回避策**: テストデータの準備は、アプリ再起動ではなく **UI 操作**で行う。
+
+```swift
+// ✓ UI 操作でデータを準備する
+Given("会員の貸出冊数を上限に設定する") { matches, _ in
+    // ログイン → 書籍カタログ → 貸出 → ホームに戻る
+    LoginPage(app: app).login(...)
+    TopPage(app: app).tapBorrowingCard()
+    MemberListPage(app: app).tapMember(memberName)
+    BookCatalogPage(app: app).tapBorrowButton(forBook: "坊っちゃん")
+    BookCatalogPage(app: app).confirmBorrowDialog()
+    // ...
+}
+```
+
+---
+
 ## 新しいシナリオを追加するときの手順
 
 1. feature ファイルにシナリオを追加（`@smoke` タグが必要なら付与）
