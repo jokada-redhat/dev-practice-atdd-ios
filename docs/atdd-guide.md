@@ -367,11 +367,7 @@ Feature: 貸出上限
 #### Step 4: テストと Lint を確認する
 
 ```bash
-xcodebuild test \
-  -project Libratta.xcodeproj \
-  -scheme LibrattaTests \
-  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
-  -only-testing:LibrattaTests   # ユニットテスト実行
+swift test                      # ユニットテスト実行 (SPM)
 swiftlint                       # 静的解析
 ```
 
@@ -379,6 +375,11 @@ swiftlint                       # 静的解析
 
 ```bash
 xcodegen generate             # Xcode プロジェクト再生成
+xcodebuild test \
+  -project Libratta.xcodeproj \
+  -scheme LibrattaTests \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -only-testing:LibrattaTests   # ユニットテスト実行 (Xcode)
 xcodebuild test \
   -project Libratta.xcodeproj \
   -scheme LibrattaUITests \
