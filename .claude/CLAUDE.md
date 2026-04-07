@@ -30,12 +30,16 @@ Libratta/
 │   └── Resources/             # アセット・リソース
 ├── LibrattaTests/
 │   ├── Features/              # Cucumber feature ファイル (.feature)
-│   ├── Steps/                 # ステップ定義 (Swift)
-│   └── ...                    # ユニットテスト
+│   ├── CucumberRunner/        # CucumberSwift ステップ定義
+│   │   ├── LibrattaTestRunner.swift
+│   │   ├── ScenarioContext.swift
+│   │   └── Steps/             # feature ごとのステップ定義
+│   └── Support/               # テストユーティリティ
 ├── LibrattaUITests/
 │   ├── Features/              # UI向け Cucumber feature ファイル
-│   ├── Steps/                 # UIテスト用ステップ定義
-│   └── ...                    # XCUITest
+│   ├── Steps/                 # feature ごとの UIステップ定義
+│   ├── PageObjects/           # Page Object パターン
+│   └── LibrattaUITests.swift  # CucumberSwift ランナー
 ├── Package.swift              # SPM 依存管理 (使用する場合)
 └── .swiftlint.yml             # SwiftLint 設定
 ```
