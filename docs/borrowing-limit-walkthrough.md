@@ -43,9 +43,9 @@ Scenario: 返却すれば再び借りられる
   Given 会員 "山田太郎" (ID: "DA-8821") が登録されている
   And 会員 "DA-8821" が 2 冊借りている状態である
   And 会員 "DA-8821" が書籍 "The Infinite Library" を既に借りている
+  And 書籍 "Dune" が登録されている
   When 会員 "DA-8821" が書籍 "The Infinite Library" を返却する
   Then 会員 "DA-8821" の貸出冊数が 2 になる
-  And 書籍 "Dune" が登録されている
   When 会員 "DA-8821" が書籍 "Dune" を借りる
   Then 会員 "DA-8821" の貸出冊数が 3 になる
 ```
