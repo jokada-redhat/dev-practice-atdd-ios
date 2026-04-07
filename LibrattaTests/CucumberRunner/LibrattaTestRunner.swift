@@ -5,8 +5,12 @@ import CucumberSwiftExpressions
 
 extension Cucumber: StepImplementation {
     public var bundle: Bundle {
+        #if SWIFT_PACKAGE
+        return Bundle.module
+        #else
         class Findme {}
         return Bundle(for: Findme.self)
+        #endif
     }
 
     public func setupSteps() {
