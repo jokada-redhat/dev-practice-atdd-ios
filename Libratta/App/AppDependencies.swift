@@ -35,7 +35,6 @@ final class AppDependencies: ObservableObject {
             loanRepository: loanRepository
         )
         generator.generate()
-
     }
 
     // MARK: - UseCases
