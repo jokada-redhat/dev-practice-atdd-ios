@@ -258,7 +258,7 @@ When("以下の認証情報でログインする") { _, step in
    - `{string}` パラメータを使うステップは `as CucumberExpression` を付ける（制約 2 参照）
    - 3パラメータ以上は DataTable に分割する（制約 3 参照）
 3. `LibrattaTestRunner.swift` の `setupSteps()` に `register*Steps(context:)` 呼び出しを追加
-4. `xcodebuild test -scheme LibrattaTests` で全テスト通過を確認
+4. `swift test` または `xcodebuild test -scheme LibrattaTests` で全テスト通過を確認
 
 ### UIテスト (LibrattaUITests)
 
