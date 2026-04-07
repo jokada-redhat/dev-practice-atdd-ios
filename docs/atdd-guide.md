@@ -8,6 +8,7 @@
 4. [Gherkin の書き方](#4-gherkin-の書き方)
 5. [良いシナリオを書くためのポイント](#5-良いシナリオを書くためのポイント)
 6. [本プロジェクトでの実践](#6-本プロジェクトでの実践)
+   - [タグによるテスト実行の絞り込み（スモークテストなど）](#タグによるテスト実行の絞り込みスモークテストなど)
 7. [よくある質問](#7-よくある質問)
 
 ---
@@ -157,6 +158,17 @@ Scenario: 登録済みの書籍が一覧表示される
 Scenario: 会員が書籍を借りる
   ...
 ```
+
+タグの活用例:
+
+| タグ | 用途 |
+|------|------|
+| `@smoke` | スモークテスト（主要機能の疎通確認） |
+| `@wip` | 作業中のシナリオ |
+| `@api` | API 関連のシナリオ |
+| `@slow` | 実行に時間がかかるシナリオ |
+
+タグによるテスト実行の絞り込み方法は [タグによるテスト実行の絞り込み](#タグによるテスト実行の絞り込みスモークテストなど) を参照してください。
 
 ## 5. 良いシナリオを書くためのポイント
 
@@ -385,6 +397,59 @@ xcodebuild test \
   -scheme LibrattaUITests \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro'
 ```
+
+### タグによるテスト実行の絞り込み（スモークテストなど）
+
+CucumberSwift は環境変数 `CUCUMBER_TAGS` でシナリオをフィルタリングできます。`@smoke` タグが付いたシナリオだけを実行する（スモークテスト）場合は以下のように指定します。
+
+#### SPM（swift test）で実行する場合
+
+```bash
+CUCUMBER_TAGS=smoke swift test
+```
+
+#### Xcode（xcodebuild）で実行する場合
+
+xcodebuild ではスキームの環境変数として渡します:
+
+```bash
+# ユニットテスト
+xcodebuild test \
+  -project Libratta.xcodeproj \
+  -scheme LibrattaTests \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -only-testing:LibrattaTests \
+  CUCUMBER_TAGS=smoke
+
+# UIテスト
+xcodebuild test \
+  -project Libratta.xcodeproj \
+  -scheme LibrattaUITests \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  CUCUMBER_TAGS=smoke
+```
+
+#### Xcode GUI から実行する場合
+
+1. Product → Scheme → Edit Scheme を開く
+2. Test → Arguments → Environment Variables を選択
+3. `CUCUMBER_TAGS` = `smoke` を追加
+
+#### 複数タグの指定
+
+カンマ区切りで複数タグを指定すると、いずれかのタグを持つシナリオが実行されます（OR 条件）:
+
+```bash
+CUCUMBER_TAGS=smoke,api swift test
+```
+
+#### どのシナリオに @smoke を付けるべきか
+
+スモークテストは「主要機能が壊れていないかの疎通確認」が目的です。以下の基準で付与します:
+
+- 各 Feature の代表的な正常系シナリオ（1〜2個）
+- ユーザーが最も頻繁に使う操作のシナリオ
+- CI で毎回実行しても負担にならない程度の数に絞る
 
 ### コミットメッセージ規約
 
