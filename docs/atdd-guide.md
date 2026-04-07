@@ -258,36 +258,41 @@ Libratta/                              # SwiftUI アプリ
 ├── Views/                             # SwiftUI ビュー
 └── ViewModels/                        # ViewModel
 
-LibrattaTests/                         # ユニットテスト（XCTest）
-├── Features/                          # feature ファイル（仕様ドキュメント）
+LibrattaTests/                         # ユニットテスト（CucumberSwift + XCTest）
+├── Features/                          # Gherkin feature ファイル（CucumberSwift が実行）
 │   ├── borrowing_flow.feature
 │   ├── book_management.feature
 │   └── ...
-└── Steps/                             # ステップ定義（XCTest メソッド）
-    ├── BorrowingFlowStepTests.swift
-    ├── BookManagementStepTests.swift
-    └── ...
+├── CucumberRunner/
+│   ├── LibrattaTestRunner.swift       # setupSteps() — 各 Steps を register 呼び出し
+│   ├── ScenarioContext.swift          # シナリオ間の状態管理
+│   └── Steps/                         # feature ごとのステップ定義
+│       ├── SharedSteps.swift
+│       ├── BorrowingFlowSteps.swift
+│       └── ...
+└── Support/
+    └── MockURLProtocolSession.swift
 
 LibrattaUITests/                       # UIテスト（CucumberSwift + XCUITest）
-├── Features/                          # UI feature ファイル
+├── Features/                          # UI feature ファイル（CucumberSwift が実行）
 │   ├── login_ui.feature
 │   ├── member_ui.feature
 │   ├── book_catalog_ui.feature
 │   └── borrowing_flow_ui.feature
-├── PageObjects/                       # Page Object パターン
-│   ├── LoginPage.swift
-│   ├── TopPage.swift
-│   ├── MemberListPage.swift
-│   ├── BookCatalogPage.swift
-│   └── LoanConfirmationPage.swift
-└── LibrattaUITests.swift              # CucumberSwift ステップ定義
+├── LibrattaUITests.swift              # setupSteps() — 各 Steps を register 呼び出し
+├── Steps/                             # feature ごとのステップ定義
+│   ├── LoginUISteps.swift
+│   ├── NavigationUISteps.swift
+│   └── ...
+└── PageObjects/                       # Page Object パターン
+    ├── LoginPage.swift
+    ├── TopPage.swift
+    └── ...
 ```
 
 ### feature ファイルからステップ定義への対応
 
-#### ユニットテスト層（XCTest）
-
-feature ファイルの各シナリオは、XCTest のテストメソッドに手動で対応させています:
+両層とも CucumberSwift が feature ファイルを自動的にパースし、ステップ定義とマッチングして XCTestCase を生成します。ステップ定義は `extension Cucumber` のインスタンスメソッドとして feature ごとにファイル分割しています。
 
 **feature ファイル:**
 ```gherkin
@@ -298,63 +303,40 @@ Scenario: 会員が書籍を借りる
   Then 書籍 "The Infinite Library" は貸出中である
 ```
 
-**ステップ定義 (Swift/XCTest):**
+**ステップ定義 (CucumberSwift / ユニットテスト):**
 ```swift
-func testSmoke_会員が書籍を借りる() throws {
-    // Given
-    let member = Member(id: "DA-8821", name: "山田太郎")
-    try memberRepo.save(member)
-    let book = Book(title: "The Infinite Library", ...)
-    try bookRepo.save(book)
-
-    // When
-    let result = borrowBookUseCase.execute(
-        memberId: "DA-8821", bookTitle: "The Infinite Library"
-    )
-
-    // Then
-    XCTAssertNotNil(loanRepo.findActiveByBookId(book.id))
+// BorrowingFlowSteps.swift
+extension Cucumber {
+    func registerBorrowingFlowSteps(context: ScenarioContext) {
+        When("会員 {string} が書籍 {string} を借りる" as CucumberExpression) { matches, _ in
+            let memberId = try matches.first(\.string)
+            let bookTitle = try matches.last(\.string)
+            context.ensureBorrowUseCase()
+            context.borrowResult = context.borrowUseCase.execute(
+                memberId: memberId, bookTitle: bookTitle
+            )
+        }
+    }
 }
 ```
 
-> **注意**: iOS の XCTest 層では、Cucumber のような自動ステップマッチングは行いません。
-> feature ファイルは仕様ドキュメントとして管理し、テストメソッドは手動で対応させます。
-
-#### UIテスト層（CucumberSwift）
-
-UI feature ファイルは CucumberSwift が自動的にパースし、XCTestCase を生成します:
-
-**feature ファイル:**
-```gherkin
-Scenario: 書籍カタログ画面に書籍カードが表示される
-  Given 書籍カタログ画面が会員 "Taro Yamada" で表示されている
-  Then 書籍 "The Infinite Library" のカードが表示されている
-```
-
-**ステップ定義 (CucumberSwift):**
+**ステップ定義 (CucumberSwift / UIテスト):**
 ```swift
-Given("書籍カタログ画面が会員 {string} で表示されている") { matches, _ in
-    let memberName = matches[1]
-    LoginPage(app: app).login(email: "test@example.com", password: "pass123")
-    TopPage(app: app).tapBorrowingCard()
-    MemberListPage(app: app).tapMember(memberName)
-    BookCatalogPage(app: app).verifyDisplayed()
+// BookCatalogUISteps.swift
+extension Cucumber {
+    func registerBookCatalogUISteps(app: XCUIApplication) {
+        Given("書籍カタログ画面が会員 {string} で表示されている" as CucumberExpression) { matches, _ in
+            let memberName = try matches.first(\.string)
+            LoginPage(app: app).login(email: "librarian@example.com", password: "password")
+            TopPage(app: app).tapBorrowingCard()
+            MemberListPage(app: app).tapMember(memberName)
+            BookCatalogPage(app: app).verifyDisplayed()
+        }
+    }
 }
 ```
 
-### @smoke タグによるテスト絞り込み
-
-`@smoke` タグ付きシナリオに対応するテストメソッドには `Smoke` プレフィックスを付けます:
-
-```bash
-# スモークテストのみ（CI の高速フィードバック用）
-swift test --filter Smoke
-
-# 全テスト
-swift test
-```
-
-詳細は [iOS BDD テストにおける @smoke タグの制約と回避策](ios-bdd-tag-constraints.md) を参照してください。
+CucumberExpression の制約については [ios-bdd-constraints.md](./ios-bdd-constraints.md) を参照してください。
 
 ### 開発の流れ
 
@@ -376,7 +358,7 @@ Feature: 貸出上限
 
 #### Step 2: ステップ定義を実装する
 
-`LibrattaTests/Steps/` にテストクラスを作成し、feature シナリオに対応するテストメソッドを実装します。
+`LibrattaTests/CucumberRunner/Steps/` にステップ定義ファイルを作成し、`extension Cucumber` のインスタンスメソッドとして `Given`/`When`/`Then` を登録します。`LibrattaTestRunner.swift` の `setupSteps()` に register 呼び出しを追加します。
 
 #### Step 3: プロダクションコードを実装する
 
@@ -385,9 +367,12 @@ Feature: 貸出上限
 #### Step 4: テストと Lint を確認する
 
 ```bash
-swift test                    # 全ユニットテスト実行
-swift test --filter Smoke     # スモークテストのみ
-swiftlint                    # 静的解析
+xcodebuild test \
+  -project Libratta.xcodeproj \
+  -scheme LibrattaTests \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -only-testing:LibrattaTests   # ユニットテスト実行
+swiftlint                       # 静的解析
 ```
 
 #### Step 5: Xcode でビルド・UIテストを実行する
@@ -423,7 +408,7 @@ xcodebuild test \
 
 ### Q: ステップ定義はどこまで再利用すべき？
 
-ユニットテスト層では XCTest メソッドなので再利用は意識しません。UIテスト層では CucumberSwift が同じステップ表現を自動的にマッチングします。ただし、無理に再利用するために表現を歪めるのは避けてください。読みやすさが最優先です。
+両層とも CucumberSwift が同じステップ表現を自動的にマッチングするため、共通ステップは `SharedSteps.swift` にまとめられます。ただし、無理に再利用するために表現を歪めるのは避けてください。読みやすさが最優先です。
 
 ### Q: UI テストとユニットテストの feature ファイルは分ける？
 
@@ -439,8 +424,9 @@ xcodebuild test \
 
 ### Q: CucumberSwift に制約はある？
 
-あります。詳細は [iOS BDD テストにおける @smoke タグの制約と回避策](ios-bdd-tag-constraints.md) を参照してください。主な制約:
+あります。詳細は [ios-bdd-constraints.md](./ios-bdd-constraints.md) を参照してください。主な制約:
 
-- feature ファイル内の `@` 文字がパースエラーを引き起こす
-- `And` キーワードのステップが正しくマッチングされないケースがある
-- ユニットテスト層では CucumberSwift を使わず XCTest で手動対応
+- feature ファイル内の `@` 文字がタグとして誤認される → DataTable で回避
+- `{string}` パラメータには `as CucumberExpression` が必要
+- multi-capture CucumberExpression は `extension Cucumber` メソッド内でのみ使用可能
+- 3パラメータ以上は DataTable に分割が必要
