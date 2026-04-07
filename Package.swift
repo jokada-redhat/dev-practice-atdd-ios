@@ -13,6 +13,9 @@ let package = Package(
             targets: ["Libratta"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/cucumberswift/CucumberSwift", from: "5.0.9")
+    ],
     targets: [
         .target(
             name: "Libratta",
@@ -20,7 +23,10 @@ let package = Package(
         ),
         .testTarget(
             name: "LibrattaTests",
-            dependencies: ["Libratta"],
+            dependencies: [
+                "Libratta",
+                .product(name: "CucumberSwift", package: "CucumberSwift")
+            ],
             path: "LibrattaTests",
             resources: [
                 .copy("Features")
